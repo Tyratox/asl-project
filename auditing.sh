@@ -19,6 +19,7 @@ echo "export HISTFILE HISTSIZE HISTFILESIZE HISTIGNORE HISTCONTROL" >> /etc/prof
 # for root it is a lost cause as the root user can remove the append-only flag anyway
 
 # Only the superuser or a process possessing the CAP_LINUX_IMMUTABLE capability can set or clear this attribute. 
+touch /home/administrator/.bash_history
 chattr +a /home/administrator/.bash_history
 
 # logcheck: https://www.debian.org/doc/manuals/securing-debian-manual/log-alerts.en.html
