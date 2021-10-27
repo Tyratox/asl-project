@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install binaries related to security or access control
-apt-get install sudo
+apt-get install sudo groupadd usermod
 
 # user configurations
 ./users.sh
