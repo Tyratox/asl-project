@@ -18,8 +18,13 @@ echo "export HISTFILE HISTSIZE HISTFILESIZE HISTIGNORE HISTCONTROL" >> /etc/prof
 # now set the file ~/.bash_history for all users to append-only
 # for root it is a lost cause as the root user can remove the append-only flag anyway
 
-# Only the superuser or a process possessing the CAP_LINUX_IMMUTABLE capability can set or clear this attribute. 
+# first create it if it doesn't exist yet
 touch /home/administrator/.bash_history
+# then change ownership
+chown administrator:administrator /home/administrator/.bash_history
+# and change the permissions
+chmod 700 /home/administrator/.bash_history
+# Only the superuser or a process possessing the CAP_LINUX_IMMUTABLE capability can set or clear this attribute. 
 chattr +a /home/administrator/.bash_history
 
 # logcheck: https://www.debian.org/doc/manuals/securing-debian-manual/log-alerts.en.html
