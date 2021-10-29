@@ -4,7 +4,7 @@
 
 apt-get install libpam-tmpdir libpam-umask
 
-# TODO: 2 Factor Authentication
+# IDEA: Maybe 2 Factor Authentication?
 
 
 # Control which users are able to su
@@ -17,12 +17,17 @@ groupadd wheel
 usermod -a -G wheel root
 usermod -a -G wheel administrator
 
+# add administrator to sudoers group
+usermod -a -G sudo administrator
+
 # only allow users of the group wheel to su to root
 # TODO: What does 'debug' here stand for?
 echo "auth requisite pam_wheel.so group=wheel debug" >> /etc/pam.d/su
 
-# only allow the users listed in /etc/sshusers-allowed to authenticate at a PAM service
-echo "auth required pam_listfile.so item=user sense=allow file=/etc/sshusers-allowed onerr=fail" >> /etc/pam.d/su
+# only allow the users root and administrator to authenticate at a PAM service
+echo "root" > /etc/pam-allowed
+echo "administrator" >> /etc/pam-allowed
+echo "auth required pam_listfile.so item=user sense=allow file=/etc/pam-allowed onerr=fail" >> /etc/pam.d/su
 
 # then by default create tempfiles separated by users
 # see https://wiki.ubuntu.com/SecureTmp for more details (e.g. why optional)

@@ -9,6 +9,9 @@ apt-get install sudo
 # configure PAM
 ./pam.sh
 
+# configure SSH
+./ssh.sh
+
 # configure logging
 ./auditing.sh
 
