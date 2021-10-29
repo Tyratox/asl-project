@@ -32,25 +32,6 @@ echo "session optional pam_tmpdir.so" >> /etc/pam.d/common-session
 # set default umask value
 echo "session optional pam_umask.so umask=077" >> /etc/pam.d/common-session
 
-# add secure defaults, i.e. whitelist approach
-
-echo "auth required pam_securetty.so" >> /etc/pam.d/other
-echo "auth required pam_unix_auth.so" >> /etc/pam.d/other
-echo "auth required pam_warn.so" >> /etc/pam.d/other
-echo "auth required pam_deny.so" >> /etc/pam.d/other
-
-echo "account required pam_unix_acct.so" >> /etc/pam.d/other
-echo "account required pam_warn.so" >> /etc/pam.d/other
-echo "account required pam_deny.so" >> /etc/pam.d/other
-
-echo "password required pam_unix_passwd.so" >> /etc/pam.d/other
-echo "password required pam_warn.so" >> /etc/pam.d/other
-echo "password required pam_deny.so" >> /etc/pam.d/other
-
-echo "session required pam_unix_session.so" >> /etc/pam.d/other
-echo "session required pam_warn.so" >> /etc/pam.d/other
-echo "session required pam_deny.so" >> /etc/pam.d/other
-
 # limits on the computational resources could be added
 
 # show message for users who log in
