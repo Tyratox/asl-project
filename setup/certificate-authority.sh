@@ -6,6 +6,9 @@
 # general debian hardening
 ./debian-hardening.sh
 
+# setup rsyslod sender
+./optional/log-sender.sh
+
 # setup nginx
 ./optional/nginx.sh
 

@@ -23,5 +23,3 @@ apt -y install sudo
 
 # uninstall git
 apt -y purge git
-
-apt -y autoremove
