@@ -30,7 +30,7 @@ chattr +a /home/administrator/.bash_history
 # logcheck: https://www.debian.org/doc/manuals/securing-debian-manual/log-alerts.en.html
 
 # now also install auditd, a much more powerful tool
-apt install auditd
+apt -y install auditd
 
 # configure it
 

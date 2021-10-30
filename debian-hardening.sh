@@ -20,3 +20,8 @@ apt -y install sudo
 
 # SELinux
 ./selinux/index.sh
+
+# uninstall git
+apt -y purge git
+
+apt -y autoremove

@@ -41,7 +41,7 @@ chown -R root:root /opt/tls
 sed -i 's/192.168.178.104 asl.localhost//' /etc/hosts
 
 # uninstall curl
-apt purge curl
+apt -y purge curl
 
 # restart nginx
 systemctl restart nginx
