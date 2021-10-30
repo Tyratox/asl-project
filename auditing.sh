@@ -29,3 +29,16 @@ chattr +a /home/administrator/.bash_history
 
 # logcheck: https://www.debian.org/doc/manuals/securing-debian-manual/log-alerts.en.html
 
+# now also install auditd, a much more powerful tool
+apt install auditd
+
+# configure it
+
+# Use these rules https://github.com/Neo23x0/auditd/blob/master/audit.rules
+cp ./config/audit.rules /etc/audit/rules.d/audit.rules
+
+# and enable it
+systemctl enable auditd
+service auditd start
+
+# now we want to log all information 

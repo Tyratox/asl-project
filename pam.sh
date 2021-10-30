@@ -2,7 +2,7 @@
 
 # Install packages
 
-apt-get install libpam-tmpdir libpam-umask
+apt -y install libpam-tmpdir libpam-umask
 
 # IDEA: Maybe 2 Factor Authentication?
 

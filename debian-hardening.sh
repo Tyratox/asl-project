@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install binaries related to security or access control
-apt-get install sudo
+apt -y install sudo
 
 # user configurations
 ./users.sh
@@ -11,6 +11,9 @@ apt-get install sudo
 
 # configure SSH
 ./ssh.sh
+
+# networking
+./networking.sh
 
 # configure logging
 ./auditing.sh
