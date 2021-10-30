@@ -6,7 +6,7 @@ apt -y install nginx
 # hide nginx/OS information
 # sed -i "s/\t# server_tokens off;/\tserver_tokens off;/" /etc/nginx/nginx.conf
 
-cat ./configs/nginx.conf > /etc/nginx/nginx.conf
+cat ./configs/nginx/nginx.conf > /etc/nginx/nginx.conf
 
 # restart nginx
 systemctl restart nginx
