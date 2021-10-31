@@ -21,4 +21,4 @@ echo "192.168.0.4 client1.imovies.ch" >> /etc/hosts
 sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"/' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
-cat ./config/interfaces > /etc/network/interfaces
+cat ./config/interfaces.conf > /etc/network/interfaces
