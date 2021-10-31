@@ -6,6 +6,9 @@
 # general debian hardening
 ./debian-hardening.sh
 
+# set the ip of the computer
+sed -i 's/address 192.168.0.0/address 192.168.0.2/' /etc/network/interfaces
+
 # setup rsyslod sender
 ./optional/log-sender.sh
 
@@ -40,14 +43,40 @@ chmod -R 700 /opt/tls
 # set the owner to root, nobody should be able to read this files except for the root user
 chown -R root:root /opt/tls
 
+# download CA certificate for the project
+curl -o ca.key http://asl.localhost/mail-ca.key
+
+# move it to /opt/CA
+# move them to /opt/tls
+mkdir /opt/CA
+mv ca.key /opt/CA
+
+# only allow reading the files to the owner and the group
+chmod -R 700 /opt/CA
+# set the owner to root, nobody should be able to read this files except for the root user
+chown -R root:root /opt/CA
+
 # remove entry from hosts file
 sed -i 's/192.168.178.104 asl.localhost//' /etc/hosts
 
 # uninstall curl
 apt -y purge curl
 
+# install nodejs
+apt -y install nodejs
+
+# install an sql server
+./optional/mariadb.sh
+
+# TODO: install the application
+
+# install the nginx configuration
+
+# download the backend
+
+# setup pm2 process autostart of the backend nodejs service
+
 # restart nginx
 systemctl restart nginx
 
-# install nodejs
-apt-get install nodejs
+./cleanup.sh

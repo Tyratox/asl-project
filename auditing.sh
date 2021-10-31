@@ -41,4 +41,5 @@ cp ./config/audit.rules /etc/audit/rules.d/audit.rules
 systemctl enable auditd
 service auditd start
 
-# now we want to log all information 
+# forward journald to syslog that is synced to a backup server
+sed -i 's/#ForwardToSyslog=yes/ForwardToSyslog=yes/' /etc/systemd/journald.conf
