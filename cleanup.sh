@@ -18,4 +18,4 @@ find /var/log -type f -regex ".*\.[0-9]$"
 for i in $(find /var/log -type f); do cat /dev/null > $i; done
 
 # reboot
-reboot
+shutdown -h now
