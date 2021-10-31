@@ -14,9 +14,4 @@ apt -y install sudo
 # set the ip of the computer
 sed -i 's/address 192.168.0.0/address 192.168.0.4/' /etc/network/interfaces
 
-# install curl
-apt -y install curl
-
-# temorarily redirect asl.localhost to host computer
-
 ./cleanup.sh
