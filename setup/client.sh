@@ -10,19 +10,9 @@ apt -y install sudo
 
 # and the networking setup (e.g. root certificate)
 ./networking.sh
-
-apt -y install libnss3-tools
-
-mkdir /usr/lib/mozilla/certificates
-cp ./public-keys/web-root.crt /usr/lib/mozilla/certificates/imovies.crt
-
 # now install the custom root certificate for firefox as well
-# see https://stackoverflow.com/a/2760345/2897827 and https://stackoverflow.com/a/48424709/2897827
-for certDB in $(find  ~/.mozilla* ~/.thunderbird -name "cert9.db")
-do
-  certDir=$(dirname ${certDB});
-  certutil -A -n "iMovies Root Certificate" -t "TCu,Cuw,Tuw" -i /usr/lib/mozilla/certificates/imovies.crt -d sql:${certDir}
-done
+# see https://bgstack15.wordpress.com/2018/10/04/firefox-trust-system-trusted-certificates/
+dirname $(grep -IrL 'p11-kit-trust.so' ~/.mozilla/firefox/*/pkcs11.txt) | xargs -t -d '\n' -I {} modutil -dbdir sql:{} -force -add 'PKCS #11 Trust Storage Module' -libfile /usr/lib64/pkcs11/p11-kit-trust.so
 
 
 cp ./public-keys/web-root.crt /usr/local/share/ca-certificates/
