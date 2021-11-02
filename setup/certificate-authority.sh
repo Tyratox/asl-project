@@ -72,8 +72,8 @@ chown -R root:root /opt/CA
 sed -i 's/192.168.178.104 asl.localhost//' /etc/hosts
 
 # add yarn repo to apt
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
 apt update
 
@@ -81,7 +81,7 @@ apt update
 apt -y install nodejs yarn
 
 # add user for running the node process
-adduser --system --no-create-home --disabled-login --uid webapp
+adduser --gecos "" --disabled-password webapp
 
 exit;
 
