@@ -19,7 +19,7 @@ sed -i 's/address 192.168.0.0/address 192.168.0.2/' /etc/network/interfaces
 ./optional/nginx-tls-only.sh
 
 # install sample tls page
-./optional/nginx-sample-tls.sh
+./optional/nginx-ca.sh
 
 # install curl
 apt -y install curl
@@ -44,12 +44,24 @@ chmod -R 700 /opt/tls
 chown -R root:root /opt/tls
 
 # download CA certificate for the project
-curl -o ca.key http://asl.localhost/mail-ca.key
+curl -o cakey.pem http://asl.localhost/cakey.pem
+curl -o cacert.pem http://asl.localhost/cacert.pem
 
 # move it to /opt/CA
-# move them to /opt/tls
-mkdir /opt/CA
-mv ca.key /opt/CA
+mkdir -p /opt/CA/private/users
+mkdir -p /opt/CA/crl
+mkdir -p /opt/CA/newcerts
+mkdir -p /opt/CA/requests
+
+touch /opt/CA/index.txt
+touch /opt/CA/crl/crl.pem
+
+echo "01" > /opt/CA/serial
+echo "01" > /opt/CA/crlnumber
+
+mv cakey.pem /opt/CA/private/
+mv cacert.pem /opt/CA/
+
 
 # only allow reading the files to the owner and the group
 chmod -R 700 /opt/CA
@@ -59,11 +71,34 @@ chown -R root:root /opt/CA
 # remove entry from hosts file
 sed -i 's/192.168.178.104 asl.localhost//' /etc/hosts
 
-# uninstall curl
-apt -y purge curl
+# add yarn repo to apt
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
-# install nodejs
-apt -y install nodejs
+apt update
+
+# install nodejs and yarn
+apt -y install nodejs yarn
+
+# add user for running the node process
+adduser --system --no-create-home --disabled-login --uid webapp
+
+exit;
+
+# install pm2 (node process manager) and ts-node (typescript interpreter)
+yarn global add pm2 ts-node
+
+mkdir -p /opt/pm2/
+git clone https://github.com/Tyratox/asl-ca-backend /opt/pm2/asl-ca-backend
+cp ./configs/pm2/backend.config.js /opt/pm2/asl-ca-backend
+
+# run backend
+pm2 start /opt/pm2/asl-ca-backend/backend.config.js
+
+# save running process
+pm2 save
+
+
 
 # install an sql server
 ./optional/mariadb.sh

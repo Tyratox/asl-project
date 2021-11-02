@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# uninstall curl
+apt -y purge curl
+
 # uninstall git
 apt -y purge git
 

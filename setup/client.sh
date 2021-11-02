@@ -14,6 +14,8 @@ update-ca-certificates
 
 # setup dns using /etc/hosts
 echo "10.0.0.254 imovies.ch" >> /etc/hosts
+echo "10.0.0.254 ca.imovies.ch" >> /etc/hosts
+echo "10.0.0.254 auth.imovies.ch" >> /etc/hosts
 
 # change network interface name s.t. the first interface is called eth0
 sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"/' /etc/default/grub
