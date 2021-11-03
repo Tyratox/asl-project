@@ -116,10 +116,10 @@ su -c "cd /opt/pm2/asl-ca-backend && yarn install" webapp
 ./optional/mariadb.sh $DB_PASSWD
 
 # run backend
-su -c "pm2 start /opt/pm2/asl-ca-backend/backend.config.js" webapp
+su -l -c "pm2 start /opt/pm2/asl-ca-backend/backend.config.js" webapp
 
 # save running process
-su -c "pm2 save" webapp
+su -l -c "pm2 save" webapp
 exit;
 
 # setup pm2 process autostart of the backend nodejs service

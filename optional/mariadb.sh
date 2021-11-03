@@ -6,9 +6,9 @@ $DB_PASSWD = $1
 apt -y install mariadb-server
 
 # set db password
-sed -i "s/toor/$DB_PASSWD/" ./configs/sql/mysql_secure_installation.sql
+sed -i "s/toor/$DB_PASSWD/" ./configs/sql/secure_installation.sql
 
 # secure the installation except for the password (set to toor)
 # See https://stackoverflow.com/a/35004940/2897827
-mysql -sfu root < "./configs/sql/mysql_secure_installation.sql"
+mysql -sfu root < "./configs/sql/secure_installation.sql"
 
