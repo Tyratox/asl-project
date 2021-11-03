@@ -90,23 +90,20 @@ adduser --gecos "" --disabled-password webapp
 
 mkdir -p /opt/pm2/
 cp ./configs/pm2/backend.config.js /opt/pm2/
-chown -R webapp:webapp /opt/pm2/
-chmod -R 700 /opt/pm2/
 
-# login as webapp user
-su - webapp
-
-echo 'export PATH="$(yarn global bin):$PATH"' >> ./.bashrc
+# add yarn to the PATH of webapp
+echo 'export PATH="$(yarn global bin):$PATH"' >> /home/webapp/.bashrc
 
 # install pm2 (node process manager) and ts-node (typescript interpreter)
-yarn global add pm2 ts-node
+su -c "yarn global add pm2 ts-node" webapp
 
 git clone https://github.com/Tyratox/asl-ca-backend /opt/pm2/asl-ca-backend
 
-cd /opt/pm2/asl-ca-backend
-yarn install
+chown -R webapp:webapp /opt/pm2/
+chmod -R 700 /opt/pm2/
 
-cd ~
+# install yarn dependencies
+su -c "cd /opt/pm2/asl-ca-backend && yarn install" webapp
 
 exit;
 
