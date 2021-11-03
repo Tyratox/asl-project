@@ -1,5 +1,7 @@
 #!/bin/bash
 
+IP=$1
+
 # set the hostname
 ./optional/set-hostname.sh "ca.imovies.ch"
 
@@ -26,7 +28,7 @@ apt -y install curl
 
 # temorarily redirect asl.localhost to host computer
 
-echo "192.168.178.104 asl.localhost" >> /etc/hosts
+echo "$IP asl.localhost" >> /etc/hosts
 
 # download certificate
 curl -o certificate.crt http://asl.localhost/ca.imovies.ch/ca.imovies.ch.crt
@@ -69,7 +71,7 @@ chmod -R 700 /opt/CA
 chown -R root:root /opt/CA
 
 # remove entry from hosts file
-sed -i 's/192.168.178.104 asl.localhost//' /etc/hosts
+sed -i "s/$IP asl.localhost//" /etc/hosts
 
 # add yarn repo to apt
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
