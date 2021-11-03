@@ -73,6 +73,9 @@ chown -R root:root /opt/CA
 # remove entry from hosts file
 sed -i "s/$IP asl.localhost//" /etc/hosts
 
+# install gnupg, required for the following
+apt -y install gnupg
+
 # add yarn repo to apt
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
