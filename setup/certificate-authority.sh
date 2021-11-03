@@ -95,7 +95,7 @@ cp ./configs/pm2/backend.config.js /opt/pm2/
 echo 'export PATH="$(yarn global bin):$PATH"' >> /home/webapp/.bashrc
 
 # install pm2 (node process manager) and ts-node (typescript interpreter)
-su -c "yarn global add pm2 ts-node" webapp
+su -l -c "yarn global add pm2 ts-node" webapp
 
 git clone https://github.com/Tyratox/asl-ca-backend /opt/pm2/asl-ca-backend
 
