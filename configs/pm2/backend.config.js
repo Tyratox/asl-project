@@ -4,7 +4,7 @@ module.exports = {
       name: "CA backend",
       cwd: "/opt/pm2/asl-ca-backend/",
       script: "ts-node",
-      args: "./src/main.ts",
+      args: "/opt/pm2/asl-ca-backend/src/main.ts",
     },
   ],
 };

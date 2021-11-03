@@ -88,14 +88,27 @@ apt -y install nodejs yarn
 # add user for running the node process
 adduser --gecos "" --disabled-password webapp
 
-exit;
+mkdir -p /opt/pm2/
+cp ./configs/pm2/backend.config.js /opt/pm2/
+chown -R webapp:webapp /opt/pm2/
+chmod -R 700 /opt/pm2/
+
+# login as webapp user
+su - webapp
+
+echo 'export PATH="$(yarn global bin):$PATH"' >> ./.bashrc
 
 # install pm2 (node process manager) and ts-node (typescript interpreter)
 yarn global add pm2 ts-node
 
-mkdir -p /opt/pm2/
 git clone https://github.com/Tyratox/asl-ca-backend /opt/pm2/asl-ca-backend
-cp ./configs/pm2/backend.config.js /opt/pm2/asl-ca-backend
+
+cd /opt/pm2/asl-ca-backend
+yarn install
+
+cd ~
+
+exit;
 
 # run backend
 pm2 start /opt/pm2/asl-ca-backend/backend.config.js
