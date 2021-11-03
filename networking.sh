@@ -5,7 +5,7 @@
 apt -y install firewalld
 
 # disable dhcp, we use static IPs
-firewall-cmd –-permanent –-remove-service=dhcpv6-client
+firewall-cmd --permanent --remove-service=dhcpv6-client
 
 # now install the custom root certificate. extension must be .crt
 cp ./public-keys/web-root.crt /usr/local/share/ca-certificates/
