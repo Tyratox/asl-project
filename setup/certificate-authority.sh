@@ -1,6 +1,7 @@
 #!/bin/bash
 
 IP=$1
+DB_PASSWD="toor"
 
 # set the hostname
 ./optional/set-hostname.sh "ca.imovies.ch"
@@ -99,30 +100,27 @@ su -l -c "yarn global add pm2 ts-node" webapp
 
 git clone https://github.com/Tyratox/asl-ca-backend /opt/pm2/asl-ca-backend
 
+# add database configuration file
+cp ./configs/ormconfig.json /opt/pm2/asl-ca-backend
+
+# change credentials
+sed -i "s/toor/$DB_PASSWD/" /opt/pm2/asl-ca-backend/ormconfig.json
+
 chown -R webapp:webapp /opt/pm2/
 chmod -R 700 /opt/pm2/
 
 # install yarn dependencies
 su -c "cd /opt/pm2/asl-ca-backend && yarn install" webapp
 
-exit;
+# install an sql server
+./optional/mariadb.sh $DB_PASSWD
 
 # run backend
-pm2 start /opt/pm2/asl-ca-backend/backend.config.js
+su -c "pm2 start /opt/pm2/asl-ca-backend/backend.config.js" webapp
 
 # save running process
-pm2 save
-
-
-
-# install an sql server
-./optional/mariadb.sh
-
-# TODO: install the application
-
-# install the nginx configuration
-
-# download the backend
+su -c "pm2 save" webapp
+exit;
 
 # setup pm2 process autostart of the backend nodejs service
 
