@@ -120,9 +120,9 @@ su -l -c "/home/webapp/.yarn/bin/pm2 start /opt/pm2/backend.config.js" webapp
 
 # save running process
 su -l -c "/home/webapp/.yarn/bin/pm2 save" webapp
-exit;
 
 # setup pm2 process autostart of the backend nodejs service
+env PATH=$PATH:/usr/bin /home/webapp/.config/yarn/global/node_modules/pm2/bin/pm2 startup systemd -u webapp --hp /home/webapp
 
 # restart nginx
 systemctl restart nginx
