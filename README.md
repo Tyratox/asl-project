@@ -4,7 +4,7 @@
 
 ## Hardening
 
-The easierst way to run the scripts in this folder is the following:
+The easiest way to run the scripts in this folder is the following:
 
 1. Run `su` and authenticate as root using your password
 2. Install git by running `apt-get install git`
