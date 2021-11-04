@@ -115,6 +115,32 @@ su -c "cd /opt/pm2/asl-ca-backend && yarn install" webapp
 # install an sql server
 ./optional/mariadb.sh $DB_PASSWD
 
+# update openssl config
+sed -i 's/.\/demoCA/\/opt\/CA\//' /opt/pm2/asl-ca-backend/ormconfig.json
+
+# install c++ compiler
+apt -y build-essential
+
+# build binary used by the backend
+/opt/pm2/asl-ca-backend/build-ca-utility.sh /opt/CA/ca-utility /etc/ssl/openssl.cnf /usr/bin/openssl
+
+# remove c++ compiler
+apt purge build-essential
+
+# change ownership of the binary
+chown root:webapp /opt/CA/ca-utility
+
+# setsuid bit
+chmod u+s /opt/CA/ca-utility
+# allow root to execute it
+chmod u+x /opt/CA/ca-utility
+
+# allow the webapp user to execute it
+chmod g+x /opt/CA/ca-utility
+
+# disallow access for everyone else
+chmod o-rwx /opt/CA/ca-utility
+
 # run backend
 su -l -c "/home/webapp/.yarn/bin/pm2 start /opt/pm2/backend.config.js" webapp
 
