@@ -64,6 +64,8 @@ echo "01" > /opt/CA/crlnumber
 
 mv cakey.pem /opt/CA/private/
 mv cacert.pem /opt/CA/
+# apparently nginx is fine with just the certificate as an empty CRL
+cp /opt/CA/cacert.pem /opt/CA/crl/revoked.pem
 
 # remove entry from hosts file
 sed -i "s/$IP asl.localhost//" /etc/hosts
