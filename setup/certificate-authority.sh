@@ -65,12 +65,6 @@ echo "01" > /opt/CA/crlnumber
 mv cakey.pem /opt/CA/private/
 mv cacert.pem /opt/CA/
 
-
-# only allow reading the files to the owner and the group
-chmod -R 700 /opt/CA
-# set the owner to root, nobody should be able to read this files except for the root user
-chown -R root:root /opt/CA
-
 # remove entry from hosts file
 sed -i "s/$IP asl.localhost//" /etc/hosts
 
@@ -88,6 +82,8 @@ apt -y install nodejs yarn
 
 # add user for running the node process
 adduser --gecos "" --disabled-password webapp
+# add user for owning the CA folder and running the setuid binary
+adduser --gecos "" --disabled-password webapp-ca
 
 mkdir -p /opt/pm2/
 cp ./configs/pm2/backend.config.js /opt/pm2/
@@ -106,6 +102,9 @@ cp ./configs/ormconfig.json /opt/pm2/asl-ca-backend
 # change credentials
 sed -i "s/toor/$DB_PASSWD/" /opt/pm2/asl-ca-backend/ormconfig.json
 
+# add .env file
+cp ./configs/.env-backend /opt/pm2/asl-ca-backend
+
 chown -R webapp:webapp /opt/pm2/
 chmod -R 700 /opt/pm2/
 
@@ -116,7 +115,7 @@ su -c "cd /opt/pm2/asl-ca-backend && yarn install" webapp
 ./optional/mariadb.sh $DB_PASSWD
 
 # update openssl config
-sed -i 's/.\/demoCA/\/opt\/CA\//' /opt/pm2/asl-ca-backend/ormconfig.json
+sed -i 's/.\/demoCA/\/opt\/CA\//' /etc/ssl/openssl.cnf
 
 # install c++ compiler
 apt -y build-essential
@@ -127,12 +126,17 @@ apt -y build-essential
 # remove c++ compiler
 apt purge build-essential
 
+# only allow reading the files to the owner and the group
+chmod -R 700 /opt/CA
+# set the owner to root, nobody should be able to read this files except for the root user
+chown -R webapp-ca:root /opt/CA
+
 # change ownership of the binary
-chown root:webapp /opt/CA/ca-utility
+chown webapp-ca:webapp /opt/CA/ca-utility
 
 # setsuid bit
 chmod u+s /opt/CA/ca-utility
-# allow root to execute it
+# allow the owner to execute it
 chmod u+x /opt/CA/ca-utility
 
 # allow the webapp user to execute it

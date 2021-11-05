@@ -8,7 +8,8 @@ apt -y install mariadb-server
 # set db password
 sed -i "s/toor/$DB_PASSWD/" ./configs/sql/secure_installation.sql
 
-# secure the installation except for the password (set to toor)
+# secure the installation
 # See https://stackoverflow.com/a/35004940/2897827
-mysql -sfu root < "./configs/sql/secure_installation.sql"
+# Also create the database imovies
+mysql -sfu root < "./configs/sql/installation.sql"
 
