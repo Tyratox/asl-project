@@ -120,7 +120,7 @@ su -c "cd /opt/pm2/asl-ca-backend && yarn install" webapp
 sed -i 's/.\/demoCA/\/opt\/CA\//' /etc/ssl/openssl.cnf
 
 # install c++ compiler
-apt -y build-essential
+apt -y install build-essential
 
 # build binary used by the backend
 /opt/pm2/asl-ca-backend/build-ca-utility.sh /opt/CA/ca-utility /etc/ssl/openssl.cnf /usr/bin/openssl
