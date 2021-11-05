@@ -135,6 +135,7 @@ chown -R webapp-ca:root /opt/CA
 
 # change ownership of the binary
 chown webapp-ca:webapp /opt/CA/ca-utility
+chown webapp-ca:webapp /opt/CA
 
 # setsuid bit
 chmod u+s /opt/CA/ca-utility
@@ -142,6 +143,7 @@ chmod u+s /opt/CA/ca-utility
 chmod u+x /opt/CA/ca-utility
 
 # allow the webapp user to execute it
+chmod g+x /opt/CA
 chmod g+x /opt/CA/ca-utility
 
 # disallow access for everyone else
