@@ -123,10 +123,10 @@ sed -i 's/.\/demoCA/\/opt\/CA\//' /etc/ssl/openssl.cnf
 apt -y install build-essential
 
 # build binary used by the backend
-/opt/pm2/asl-ca-backend/build-ca-utility.sh /opt/CA/ca-utility /etc/ssl/openssl.cnf /usr/bin/openssl
+/opt/pm2/asl-ca-backend/build-ca-utility.sh /opt/pm2/asl-ca-backend/src/ca-utility.cpp /opt/CA/ca-utility /etc/ssl/openssl.cnf /usr/bin/openssl
 
 # remove c++ compiler
-apt purge build-essential
+apt -y purge build-essential
 
 # only allow reading the files to the owner and the group
 chmod -R 700 /opt/CA
