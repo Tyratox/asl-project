@@ -122,6 +122,9 @@ sed -i 's/.\/demoCA/\/opt\/CA\//' /etc/ssl/openssl.cnf
 # install c++ compiler
 apt -y install build-essential
 
+# allow webapp user to reload nginx without a password
+echo "webapp-ca ALL=(ALL) NOPASSWD: /usr/sbin/nginx -s reload" > /etc/sudoers.d/nginx
+
 # build binary used by the backend
 /opt/pm2/asl-ca-backend/build-ca-utility.sh /opt/pm2/asl-ca-backend/src/ca-utility.cpp /opt/CA/ca-utility /etc/ssl/openssl.cnf /usr/bin/openssl
 
