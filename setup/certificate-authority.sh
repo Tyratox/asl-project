@@ -105,7 +105,7 @@ cp ./configs/ormconfig.json /opt/pm2/asl-ca-backend
 sed -i "s/toor/$DB_PASSWD/" /opt/pm2/asl-ca-backend/ormconfig.json
 
 # add .env file
-cp ./configs/.env-backend /opt/pm2/asl-ca-backend
+cp ./configs/.env-backend /opt/pm2/asl-ca-backend/.env
 
 chown -R webapp:webapp /opt/pm2/
 chmod -R 700 /opt/pm2/
