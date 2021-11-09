@@ -60,7 +60,7 @@ apt update
 # install nodejs and yarn
 apt -y install nodejs yarn
 
-git clone https://github.com/Tyratox/asl-ca-backend /srv/asl-ca-frontend
+git clone https://github.com/Tyratox/asl-ca-frontend /srv/asl-ca-frontend
 
 # add .env file
 cp ./configs/.env-frontend /srv/asl-ca-frontend
