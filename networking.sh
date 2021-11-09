@@ -12,7 +12,7 @@ cp ./public-keys/web-root.crt /usr/local/share/ca-certificates/
 update-ca-certificates
 
 # setup dns using /etc/hosts
-echo "192.168.0.1 frontend.imovies.ch" >> /etc/hosts
+echo "192.168.0.1 imovies.ch" >> /etc/hosts
 echo "192.168.0.2 ca.imovies.ch" >> /etc/hosts
 echo "192.168.0.2 auth.imovies.ch" >> /etc/hosts
 echo "192.168.0.3 backup.imovies.ch" >> /etc/hosts
