@@ -61,6 +61,7 @@ mkdir -p /opt/CA/private/users
 mkdir -p /opt/CA/crl
 mkdir -p /opt/CA/newcerts
 mkdir -p /opt/CA/requests
+mkdir -p /opt/CA/tmp
 
 touch /opt/CA/index.txt
 touch /opt/CA/crl/crl.pem
@@ -164,6 +165,11 @@ chmod g+x /opt/CA/ca-utility
 
 # disallow access for everyone else
 chmod o-rwx /opt/CA/ca-utility
+
+# allow webapp user to write to the tmp folder
+chown webapp-ca:webapp /opt/CA/tmp
+chmod u+rwx /opt/CA/tmp
+chmod g+rwx /opt/CA/tmp
 
 # run backend
 su -l -c "/home/webapp/.yarn/bin/pm2 start /opt/pm2/backend.config.js" webapp
