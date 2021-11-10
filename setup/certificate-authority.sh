@@ -37,15 +37,19 @@ apt -y install curl
 
 echo "$IP asl.localhost" >> /etc/hosts
 
-# download certificate
-curl -o certificate.crt http://asl.localhost/ca.imovies.ch/ca.imovies.ch.crt
-# and private key
-curl -o private.key http://asl.localhost/ca.imovies.ch/ca.imovies.ch.key
+# download certificates
+curl -o ca.imovies.ch.crt http://asl.localhost/ca.imovies.ch/ca.imovies.ch.crt
+curl -o auth.imovies.ch.crt http://asl.localhost/auth.imovies.ch/auth.imovies.ch.crt
+# and private keys
+curl -o ca.imovies.ch.key http://asl.localhost/ca.imovies.ch/ca.imovies.ch.key
+curl -o auth.imovies.ch.key http://asl.localhost/auth.imovies.ch/auth.imovies.ch.key
 
 # move them to /opt/tls
 mkdir /opt/tls
-mv certificate.crt /opt/tls
-mv private.key /opt/tls
+mv ca.imovies.ch.crt /opt/tls
+mv auth.imovies.ch.crt /opt/tls
+mv ca.imovies.ch.key  /opt/tls
+mv auth.imovies.ch.key  /opt/tls
 
 # only allow reading the files to the owner and the group
 chmod -R 700 /opt/tls
