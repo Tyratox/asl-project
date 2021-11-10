@@ -3,6 +3,12 @@
 IP=$1
 DB_PASSWD="toor"
 
+if [ -z "$IP" ]
+then
+  echo "Usage: ./setup/certificate-authority.sh HOST_IP"
+  exit
+fi
+
 # set the hostname
 ./optional/set-hostname.sh "ca.imovies.ch"
 

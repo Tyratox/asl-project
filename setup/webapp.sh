@@ -2,6 +2,12 @@
 
 IP=$1
 
+if [ -z "$IP" ]
+then
+  echo "Usage: ./setup/webapp.sh HOST_IP"
+  exit
+fi
+
 # set the hostname
 ./optional/set-hostname.sh "imovies.ch"
 
