@@ -110,11 +110,15 @@ cp ./configs/.env-backend /opt/pm2/asl-ca-backend/.env
 chown -R webapp:webapp /opt/pm2/
 chmod -R 700 /opt/pm2/
 
-# install yarn dependencies
-su -c "cd /opt/pm2/asl-ca-backend && yarn install" webapp
-
 # install an sql server
 ./optional/mariadb.sh $DB_PASSWD
+
+# install yarn dependencies
+su -c "cd /opt/pm2/asl-ca-backend && yarn install" webapp
+# build backend
+su -c "cd /opt/pm2/asl-ca-backend && yarn build" webapp
+# run migrations
+su -c "cd /opt/pm2/asl-ca-backend && yarn run:migrations" webapp
 
 # update openssl config
 sed -i 's/.\/demoCA/\/opt\/CA\//' /etc/ssl/openssl.cnf
