@@ -118,7 +118,7 @@ su -c "cd /opt/pm2/asl-ca-backend && yarn install" webapp
 # build backend
 su -c "cd /opt/pm2/asl-ca-backend && yarn build" webapp
 # run migrations
-su -c "cd /opt/pm2/asl-ca-backend && yarn run:migrations" webapp
+su -c "cd /opt/pm2/asl-ca-backend && yarn migrations:run" webapp
 
 # update openssl config
 sed -i 's/.\/demoCA/\/opt\/CA\//' /etc/ssl/openssl.cnf
