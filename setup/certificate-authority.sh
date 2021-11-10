@@ -93,6 +93,8 @@ adduser --gecos "" --disabled-password webapp
 # add user for owning the CA folder and running the setuid binary
 adduser --gecos "" --disabled-password webapp-ca
 
+WEBAPP_CA_UID=$(id -u webapp-ca)
+
 mkdir -p /opt/pm2/
 cp ./configs/pm2/backend.config.js /opt/pm2/
 
@@ -136,7 +138,7 @@ apt -y install build-essential
 echo "webapp-ca ALL=(ALL) NOPASSWD: /usr/sbin/nginx -s reload" > /etc/sudoers.d/nginx
 
 # build binary used by the backend
-/opt/pm2/asl-ca-backend/build-ca-utility.sh /opt/pm2/asl-ca-backend/src/ca-utility.cpp /opt/CA/ca-utility /opt/CA/ /etc/ssl/openssl.cnf /usr/bin/openssl
+/opt/pm2/asl-ca-backend/build-ca-utility.sh /opt/pm2/asl-ca-backend/src/ca-utility.cpp /opt/CA/ca-utility /opt/CA/ /etc/ssl/openssl.cnf /usr/bin/openssl $WEBAPP_CA_UID
 
 # remove c++ compiler
 apt -y purge build-essential
