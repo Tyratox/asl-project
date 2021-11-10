@@ -131,6 +131,7 @@ su -c "cd /opt/pm2/asl-ca-backend && yarn migrations:run" webapp
 
 # update openssl config
 sed -i 's/.\/demoCA/\/opt\/CA\//' /etc/ssl/openssl.cnf
+sed -i 's/#unique_subject = no/unique_subject = no/' /etc/ssl/openssl.cnf
 
 # install c++ compiler
 apt -y install build-essential
