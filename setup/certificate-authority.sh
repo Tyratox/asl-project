@@ -141,7 +141,7 @@ echo "webapp-ca ALL=(ALL) NOPASSWD: /usr/sbin/nginx -s reload" > /etc/sudoers.d/
 /opt/pm2/asl-ca-backend/build-ca-utility.sh /opt/pm2/asl-ca-backend/src/ca-utility.cpp /opt/CA/ca-utility /opt/CA/ /etc/ssl/openssl.cnf /usr/bin/openssl $WEBAPP_CA_UID
 
 # remove c++ compiler
-apt -y purge build-essential
+# apt -y purge build-essential
 
 # only allow reading the files to the owner and the group
 chmod -R 700 /opt/CA
