@@ -1,6 +1,6 @@
 #!/bin/bash
 
-$DB_PASSWD = $1 
+DB_PASSWD=$1 
 
 # install the mariadb server
 apt -y install mariadb-server
