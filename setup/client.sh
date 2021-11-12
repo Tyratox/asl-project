@@ -12,10 +12,12 @@ apt -y install sudo
 cp ./public-keys/web-root.crt /usr/local/share/ca-certificates/
 update-ca-certificates
 
-# setup dns using /etc/hosts
-echo "10.0.0.254 imovies.ch" >> /etc/hosts
-echo "10.0.0.254 ca.imovies.ch" >> /etc/hosts
-echo "10.0.0.254 auth.imovies.ch" >> /etc/hosts
+# resolve hostnames using /etc/hosts
+echo "192.168.0.1 imovies.ch" >> /etc/hosts
+echo "192.168.0.2 ca.imovies.ch" >> /etc/hosts
+echo "192.168.0.2 auth.imovies.ch" >> /etc/hosts
+echo "192.168.0.3 backup.imovies.ch" >> /etc/hosts
+echo "192.168.0.254 internal-fw.imovies.ch" >> /etc/hosts
 
 # change network interface name s.t. the first interface is called eth0
 sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"/' /etc/default/grub
