@@ -1,13 +1,6 @@
 #!/bin/bash
 
-IP=$1
 DB_PASSWD="toor"
-
-if [ -z "$IP" ]
-then
-  echo "Usage: ./setup/certificate-authority.sh HOST_IP"
-  exit
-fi
 
 # set the hostname
 ./optional/set-hostname.sh "ca.imovies.ch"
@@ -33,23 +26,15 @@ sed -i 's/address 192.168.0.0/address 192.168.0.2/' /etc/network/interfaces
 # install curl
 apt -y install curl
 
-# temorarily redirect asl.localhost to host computer
-
-echo "$IP asl.localhost" >> /etc/hosts
-
-# download certificates
-curl -o ca.imovies.ch.crt http://asl.localhost/ca.imovies.ch/ca.imovies.ch.crt
-curl -o auth.imovies.ch.crt http://asl.localhost/auth.imovies.ch/auth.imovies.ch.crt
-# and private keys
-curl -o ca.imovies.ch.key http://asl.localhost/ca.imovies.ch/ca.imovies.ch.key
-curl -o auth.imovies.ch.key http://asl.localhost/auth.imovies.ch/auth.imovies.ch.key
+# download certificates and private keys
+git clone https://github.com/asl-project-group-7-2021/asl-project-keys.git ../asl-project-keys
 
 # move them to /opt/tls
 mkdir /opt/tls
-mv ca.imovies.ch.crt /opt/tls
-mv auth.imovies.ch.crt /opt/tls
-mv ca.imovies.ch.key  /opt/tls
-mv auth.imovies.ch.key  /opt/tls
+cp ../asl-project-keys/ca.imovies.ch/ca.imovies.ch.crt /opt/tls
+cp ../asl-project-keys/auth.imovies.ch/auth.imovies.ch.crt /opt/tls
+cp ../asl-project-keys/ca.imovies.ch/ca.imovies.ch.key /opt/tls
+cp ../asl-project-keys/auth.imovies.chauth.imovies.ch.key /opt/tls
 
 # only allow reading the files to the owner and the group
 chmod -R 700 /opt/tls
@@ -73,13 +58,10 @@ touch /opt/CA/crl/crl.pem
 echo "01" > /opt/CA/serial
 echo "01" > /opt/CA/crlnumber
 
-mv cakey.pem /opt/CA/private/
-mv cacert.pem /opt/CA/
+cp ../asl-project-keys/cakey.pem /opt/CA/private/
+cp ../asl-project-keys/cacert.pem /opt/CA/
 # apparently nginx is fine with just the certificate as an empty CRL
 cp /opt/CA/cacert.pem /opt/CA/crl/revoked.pem
-
-# remove entry from hosts file
-sed -i "s/$IP asl.localhost//" /etc/hosts
 
 # install gnupg, required for the following
 apt -y install gnupg
@@ -109,7 +91,7 @@ echo 'export PATH="$(yarn global bin):$PATH"' >> /home/webapp/.bashrc
 # install pm2 (node process manager) and ts-node (typescript interpreter)
 su -l -c "yarn global add pm2 ts-node" webapp
 
-git clone https://github.com/Tyratox/asl-ca-backend /opt/pm2/asl-ca-backend
+git clone https://github.com/asl-project-group-7-2021/asl-ca-backend /opt/pm2/asl-ca-backend
 
 # add database configuration file
 cp ./configs/ormconfig.json /opt/pm2/asl-ca-backend
