@@ -4,8 +4,8 @@
 	<lastchange></lastchange>
 	<system>
 		<optimization>normal</optimization>
-		<hostname>pfSense</hostname>
-		<domain>imovies</domain>
+		<hostname>fw-1</hostname>
+		<domain>imovies.ch</domain>
 		<group>
 			<name>all</name>
 			<description><![CDATA[All Users]]></description>
