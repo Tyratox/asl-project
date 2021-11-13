@@ -4,7 +4,7 @@
 ./optional/set-hostname.sh "imovies.ch"
 
 # general debian hardening
-./debian-hardening.sh
+./debian-hardening.sh "service"
 
 # set the ip of the computer to 192.168.0.1
 sed -i 's/address 192.168.0.0/address 192.168.0.1/' /etc/network/interfaces

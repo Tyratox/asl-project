@@ -1,5 +1,7 @@
 #!/bin/bash
 
+TYPE=$1
+
 # install binaries related to security or access control
 apt -y install sudo
 
@@ -13,7 +15,7 @@ apt -y install sudo
 ./ssh.sh
 
 # networking
-./networking.sh
+./networking.sh $TYPE
 
 # configure logging
 ./auditing.sh

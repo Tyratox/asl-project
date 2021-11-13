@@ -6,7 +6,7 @@ DB_PASSWD="toor"
 ./optional/set-hostname.sh "ca.imovies.ch"
 
 # general debian hardening
-./debian-hardening.sh
+./debian-hardening.sh "service"
 
 # set the ip of the computer
 sed -i 's/address 192.168.0.0/address 192.168.0.2/' /etc/network/interfaces
