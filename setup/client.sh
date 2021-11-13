@@ -50,8 +50,8 @@ fi
 
 if [ -n "$PFSENSE_USERNAME" ]
 then
-  sed -i "s <name>admin</name> <name>$PFSENSE_USERNAME</name>/" ./configs/pfsense/fw-1.imovies.ch.xml
-  sed -i "s <name>admin</name> <name>$PFSENSE_USERNAME</name>/" ./configs/pfsense/fw-2.imovies.ch.xml
+  sed -i "s <name>admin</name> <name>$PFSENSE_USERNAME</name> " ./configs/pfsense/fw-1.imovies.ch.xml
+  sed -i "s <name>admin</name> <name>$PFSENSE_USERNAME</name> " ./configs/pfsense/fw-2.imovies.ch.xml
   sed -i "s/admin@/$PFSENSE_USERNAME@/g" ./configs/pfsense/fw-1.imovies.ch.xml
   sed -i "s/admin@/$PFSENSE_USERNAME@/g" ./configs/pfsense/fw-2.imovies.ch.xml
 fi
