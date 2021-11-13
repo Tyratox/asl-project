@@ -158,6 +158,10 @@ chown webapp-ca:webapp /opt/CA/tmp
 chmod u+rwx /opt/CA/tmp
 chmod g+rwx /opt/CA/tmp
 
+# and reading the crl folder
+chown webapp-ca:webapp /opt/CA/crl
+chmod -R g+rx /opt/CA/crl
+
 # run backend
 su -l -c "/home/webapp/.yarn/bin/pm2 start /opt/pm2/backend.config.js" webapp
 
