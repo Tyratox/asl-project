@@ -20,7 +20,10 @@ echo "192.168.0.1 imovies.ch" >> /etc/hosts
 echo "192.168.0.2 ca.imovies.ch" >> /etc/hosts
 echo "192.168.0.2 auth.imovies.ch" >> /etc/hosts
 
+echo "# 192.168.0.254 fw-1.imovies.ch" >> /etc/hosts
 echo "10.0.0.254 fw-1.imovies.ch" >> /etc/hosts
+
+echo "# 172.16.0.254 fw-1.imovies.ch" >> /etc/hosts
 echo "10.0.0.253 fw-2.imovies.ch" >> /etc/hosts
 
 echo "172.16.0.1 backup.imovies.ch" >> /etc/hosts
