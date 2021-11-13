@@ -159,6 +159,39 @@
 			</created>
 		</rule>
 		<rule>
+			<id></id>
+			<tracker>1636810710</tracker>
+			<type>pass</type>
+			<interface>wan</interface>
+			<ipprotocol>inet</ipprotocol>
+			<tag></tag>
+			<tagged></tagged>
+			<max></max>
+			<max-src-nodes></max-src-nodes>
+			<max-src-conn></max-src-conn>
+			<max-src-states></max-src-states>
+			<statetimeout></statetimeout>
+			<statetype><![CDATA[keep state]]></statetype>
+			<os></os>
+			<protocol>tcp</protocol>
+			<source>
+				<any></any>
+			</source>
+			<destination>
+				<address>172.16.0.1</address>
+				<port>10514</port>
+			</destination>
+			<descr></descr>
+			<updated>
+				<time>1636810710</time>
+				<username><![CDATA[admin@172.16.0.100 (Local Database)]]></username>
+			</updated>
+			<created>
+				<time>1636810710</time>
+				<username><![CDATA[admin@172.16.0.100 (Local Database)]]></username>
+			</created>
+		</rule>
+		<rule>
 			<type>pass</type>
 			<ipprotocol>inet</ipprotocol>
 			<descr><![CDATA[Default allow LAN to any rule]]></descr>
