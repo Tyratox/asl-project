@@ -59,11 +59,11 @@ fi
 # download certificates and private keys
 git clone https://github.com/asl-project-group-7-2021/asl-project-keys.git ../asl-project-keys
 
-CRT_1_BASE64=$(cat ../asl-project-keys/fw-1.imovies.ch/fw-1.imovies.ch.crt)
-CRT_2_BASE64=$(cat ../asl-project-keys/fw-2.imovies.ch/fw-2.imovies.ch.crt)
+CRT_1_BASE64=$(cat ../asl-project-keys/fw-1.imovies.ch/fw-1.imovies.ch.crt | base64)
+CRT_2_BASE64=$(cat ../asl-project-keys/fw-2.imovies.ch/fw-2.imovies.ch.crt | base64)
 
-KEY_1_BASE64=$(cat ../asl-project-keys/fw-1.imovies.ch/fw-1.imovies.ch.key)
-KEY_2_BASE64=$(cat ../asl-project-keys/fw-2.imovies.ch/fw-2.imovies.ch.key)
+KEY_1_BASE64=$(cat ../asl-project-keys/fw-1.imovies.ch/fw-1.imovies.ch.key | base64)
+KEY_2_BASE64=$(cat ../asl-project-keys/fw-2.imovies.ch/fw-2.imovies.ch.key | base64)
 
 sed -i "s <crt>.*</crt> <crt>$CRT_1_BASE64</crt> " ./configs/pfsense/fw-1.imovies.ch.xml
 sed -i "s <crt>.*</crt> <crt>$CRT_2_BASE64</crt> " ./configs/pfsense/fw-2.imovies.ch.xml
