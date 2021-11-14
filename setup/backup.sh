@@ -8,6 +8,9 @@
 
 # set the ip of the computer
 sed -i 's/address 192.168.0.0/address 172.16.0.1/' /etc/network/interfaces
+sed -i 's/network 192.168.0.0/network 172.16.0.0/' /etc/network/interfaces
+sed -i 's/netmask 255.255.255.0/netmask 255.255.255.0/' /etc/network/interfaces
+sed -i 's/gateway 172.16.0.254/gateway 172.16.0.254/' /etc/network/interfaces
 
 # setup rsyslod receiver
 ./optional/log-receiver.sh
