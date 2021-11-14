@@ -12,6 +12,9 @@ sed -i 's/address 192.168.0.0/address 172.16.0.1/' /etc/network/interfaces
 # setup rsyslod receiver
 ./optional/log-receiver.sh
 
+# setup rsyslod receiver
+./optional/backup-receiver.sh
+
 # install curl
 apt -y install curl
 
