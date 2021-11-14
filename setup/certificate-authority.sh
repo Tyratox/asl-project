@@ -45,10 +45,6 @@ chmod -R 700 /opt/tls
 # set the owner to root, nobody should be able to read this files except for the root user
 chown -R root:root /opt/tls
 
-# download CA certificate for the project
-curl -o cakey.pem http://asl.localhost/cakey.pem
-curl -o cacert.pem http://asl.localhost/cacert.pem
-
 # move it to /opt/CA
 mkdir -p /opt/CA/private/users
 mkdir -p /opt/CA/crl

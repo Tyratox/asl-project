@@ -3,7 +3,7 @@
 TYPE=$1
 
 # use firewalld instead of iptables, uses iptables under the hood
-# SSH and DHCP is enabled by default and it is enabled automatically
+# SSH and DHCP are allowed by default and the firewall is enabled automatically
 apt -y install firewalld
 
 # disable dhcp, we use static IPs
