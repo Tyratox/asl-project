@@ -7,8 +7,8 @@ mkdir /home/administrator/.ssh
 cat ./public-keys/administrator-key.pub > /home/administrator/.ssh/authorized_keys
 
 if [ "$TYPE" == "backup" ]; then
-  mkdir /home/backup-user/.ssh
-  cat ./public-keys/backup-user-key.pub > /home/backup-user/.ssh/authorized_keys
+  mkdir /home/ca-backup/.ssh
+  cat ./public-keys/ca-backup-key.pub > /home/ca-backup/.ssh/authorized_keys
 fi
 
 # disable password authentication
@@ -24,7 +24,7 @@ echo "PermitRootLogin no" >> /etc/ssh/sshd_config
 
 if [ "$TYPE" == "backup" ]; then
   # allow the administrator user and the backup user to log in via ssh
-  echo "AllowUsers administrator backup-user" >> /etc/ssh/sshd_config
+  echo "AllowUsers administrator ca-backup" >> /etc/ssh/sshd_config
 else
   # only allow the administrator user to log in via ssh
   echo "AllowUsers administrator" >> /etc/ssh/sshd_config

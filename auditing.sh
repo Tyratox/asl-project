@@ -35,7 +35,7 @@ echo "export HISTFILE HISTSIZE HISTFILESIZE HISTIGNORE HISTCONTROL" >> /etc/prof
 setup_user_dir_for_auditing "administrator"
 
 if [ "$TYPE" == "backup" ]; then
-  setup_user_dir_for_auditing "backup-user"
+  setup_user_dir_for_auditing "ca-backup"
 else
   setup_user_dir_for_auditing "webapp-ca"
   setup_user_dir_for_auditing "webapp"
