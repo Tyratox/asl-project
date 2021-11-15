@@ -38,6 +38,8 @@
 			<loginautocomplete></loginautocomplete>
 			<ssl-certref>618fb721919af</ssl-certref>
 			<dashboardcolumns>2</dashboardcolumns>
+			<webguicss>pfSense.css</webguicss>
+			<logincss>1e3f75;</logincss>
 		</webgui>
 		<disablenatreflection>yes</disablenatreflection>
 		<disablesegmentationoffloading></disablesegmentationoffloading>
@@ -54,8 +56,20 @@
 		<already_run_config_upgrade></already_run_config_upgrade>
 		<language>en_US</language>
 		<timezone>Etc/UTC</timezone>
-		<dnsallowoverride></dnsallowoverride>
 		<dns1host></dns1host>
+		<dnslocalhost>local</dnslocalhost>
+		<maximumstates></maximumstates>
+		<aliasesresolveinterval></aliasesresolveinterval>
+		<maximumfrags></maximumfrags>
+		<reflectiontimeout></reflectiontimeout>
+		<firmware>
+			<disablecheck></disablecheck>
+		</firmware>
+		<gitsync>
+			<repositoryurl></repositoryurl>
+			<branch></branch>
+		</gitsync>
+		<pkg_repo_conf_path>/usr/local/share/pfSense/pkg/repos/pfSense-repo-252.conf</pkg_repo_conf_path>
 	</system>
 	<interfaces>
 		<wan>
@@ -127,6 +141,38 @@
 	<filter>
 		<rule>
 			<id></id>
+			<tracker>1636913777</tracker>
+			<type>pass</type>
+			<interface>wan</interface>
+			<ipprotocol>inet</ipprotocol>
+			<tag></tag>
+			<tagged></tagged>
+			<max></max>
+			<max-src-nodes></max-src-nodes>
+			<max-src-conn></max-src-conn>
+			<max-src-states></max-src-states>
+			<statetimeout></statetimeout>
+			<statetype><![CDATA[keep state]]></statetype>
+			<os></os>
+			<source>
+				<any></any>
+			</source>
+			<destination>
+				<address>192.168.0.0/24</address>
+			</destination>
+			<descr></descr>
+			<gateway>Firewall1</gateway>
+			<updated>
+				<time>1636913777</time>
+				<username><![CDATA[root@172.16.0.100 (Local Database)]]></username>
+			</updated>
+			<created>
+				<time>1636913777</time>
+				<username><![CDATA[root@172.16.0.100 (Local Database)]]></username>
+			</created>
+		</rule>
+		<rule>
+			<id></id>
 			<tracker>1636810709</tracker>
 			<type>pass</type>
 			<interface>wan</interface>
@@ -190,6 +236,38 @@
 				<time>1636810710</time>
 				<username><![CDATA[admin@172.16.0.100 (Local Database)]]></username>
 			</created>
+		</rule>
+		<rule>
+			<id></id>
+			<tracker>1636911937</tracker>
+			<type>pass</type>
+			<interface>lan</interface>
+			<ipprotocol>inet</ipprotocol>
+			<tag></tag>
+			<tagged></tagged>
+			<max></max>
+			<max-src-nodes></max-src-nodes>
+			<max-src-conn></max-src-conn>
+			<max-src-states></max-src-states>
+			<statetimeout></statetimeout>
+			<statetype><![CDATA[keep state]]></statetype>
+			<os></os>
+			<source>
+				<any></any>
+			</source>
+			<destination>
+				<address>192.168.0.0/24</address>
+			</destination>
+			<descr></descr>
+			<gateway>Firewall1</gateway>
+			<created>
+				<time>1636911937</time>
+				<username><![CDATA[root@172.16.0.100 (Local Database)]]></username>
+			</created>
+			<updated>
+				<time>1636911986</time>
+				<username><![CDATA[root@172.16.0.100 (Local Database)]]></username>
+			</updated>
 		</rule>
 		<rule>
 			<type>pass</type>
@@ -330,14 +408,17 @@
 	<openvpn></openvpn>
 	<dnshaper></dnshaper>
 	<unbound>
-		<enable></enable>
 		<dnssec></dnssec>
-		<active_interface></active_interface>
-		<outgoing_interface></outgoing_interface>
+		<active_interface>all</active_interface>
+		<outgoing_interface>all</outgoing_interface>
 		<custom_options></custom_options>
 		<hideidentity></hideidentity>
 		<hideversion></hideversion>
 		<dnssecstripped></dnssecstripped>
+		<port></port>
+		<tlsport></tlsport>
+		<sslcertref>618fb721919af</sslcertref>
+		<system_domain_local_zone_type>transparent</system_domain_local_zone_type>
 	</unbound>
 	<revision>
 		<time>1636811276</time>

@@ -39,6 +39,8 @@
 			<ssl-certref>618e5356c9019</ssl-certref>
 			<althostnames></althostnames>
 			<dashboardcolumns>2</dashboardcolumns>
+			<webguicss>pfSense.css</webguicss>
+			<logincss>1e3f75;</logincss>
 		</webgui>
 		<disablenatreflection>yes</disablenatreflection>
 		<disablesegmentationoffloading></disablesegmentationoffloading>
@@ -54,6 +56,17 @@
 		<hn_altq_enable></hn_altq_enable>
 		<already_run_config_upgrade></already_run_config_upgrade>
 		<timezone>Etc/UTC</timezone>
+				<language>en_US</language>
+		<dnslocalhost>local</dnslocalhost>
+		<dns1host></dns1host>
+		<firmware>
+			<disablecheck></disablecheck>
+		</firmware>
+		<gitsync>
+			<repositoryurl></repositoryurl>
+			<branch></branch>
+		</gitsync>
+		<pkg_repo_conf_path>/usr/local/share/pfSense/pkg/repos/pfSense-repo-252.conf</pkg_repo_conf_path>
 	</system>
 	<interfaces>
 		<wan>
@@ -495,12 +508,16 @@
 	<unbound>
 		<enable></enable>
 		<dnssec></dnssec>
-		<active_interface></active_interface>
-		<outgoing_interface></outgoing_interface>
+		<active_interface>all</active_interface>
+		<outgoing_interface>all</outgoing_interface>
 		<custom_options></custom_options>
 		<hideidentity></hideidentity>
 		<hideversion></hideversion>
 		<dnssecstripped></dnssecstripped>
+		<port></port>
+		<tlsport></tlsport>
+		<sslcertref>618e5356c9019</sslcertref>
+		<system_domain_local_zone_type>transparent</system_domain_local_zone_type>
 	</unbound>
 	<revision>
 		<time>1636796811</time>
