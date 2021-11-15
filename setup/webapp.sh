@@ -68,6 +68,11 @@ yarn --cwd /srv/asl-ca-frontend build
 # generate static files
 yarn --cwd /srv/asl-ca-frontend export
 
+# set permissions of the folder
+
+chown root:root /srv/asl-ca-frontend/
+chmod 744 /srv/asl-ca-frontend/
+
 # restart nginx
 systemctl restart nginx
 
