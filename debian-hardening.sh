@@ -12,13 +12,13 @@ apt -y install sudo
 ./pam.sh
 
 # configure SSH
-./ssh.sh
+./ssh.sh $TYPE
 
 # networking
 ./networking.sh $TYPE
 
 # configure logging
-./auditing.sh
+./auditing.sh $TYPE
 
 # SELinux
 ./selinux/index.sh

@@ -5,14 +5,15 @@
 1. Download the newest image, for example [debian-11.1.0-amd64-netinst.iso](https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.1.0-amd64-netinst.iso) in case of x64 Debian.
 2. Create a new VM and choose the just downloaded ISO as installation medium
 3. When promted, set the hostname to `hostname` and leave the domain empty
-4. When setting up a server VM
+4. The username of the non-root user should be set to `administrator`
+5. When setting up a server VM
    1. Partition the file system in a way s.t. the folders containing the temporary files are on different partitions (`/tmp` and `/var/tmp`)
    2. Certain folders can also be put on a different partition, for example folders containing static information. These partitions can then be mounted read-only.
    3. In the software selection menu, select `standard system utilities` and `SSH server`
-5. When setting up a client
+6. When setting up a client
    1. It suffices to just put everything on one partition
    2. In the software selection menu, select `Debian Desktop Environment`, `GNOME` and `standard system utilities`.
-6. For installation allow the VMs to connect to the internet by setting the Network mode to for example NAT.
+7. For installation allow the VMs to connect to the internet by setting the Network mode to for example NAT.
 
 ## Filesystem
 
