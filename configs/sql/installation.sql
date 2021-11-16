@@ -5,7 +5,8 @@ DROP DATABASE IF EXISTS test;
 DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 
 CREATE DATABASE imovies;
-CREATE USER 'imovies'@'localhost' identified by 'toor';
-GRANT ALL PRIVILEGES ON imovies.* to 'imovies'@'localhost';
+CREATE USER 'uname'@'localhost' identified by 'pwd';
+GRANT SELECT, INSERT, UPDATE, DELETE ON `imovies`.* TO 'uname'@'localhost';
+ALTER USER 'uname'@'localhost' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0; 
 
 FLUSH PRIVILEGES;

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-DB_PASSWD="toor"
-
 # set the hostname
 ./optional/set-hostname.sh "ca.imovies.ch"
 
@@ -40,7 +38,7 @@ cp ../asl-project-keys/auth.imovies.chauth.imovies.ch.key /opt/tls
 ln -s /opt/tls/ca.imovies.ch.crt /opt/tls/certificate.crt
 ln -s /opt/tls/ca.imovies.ch.key /opt/tls/private.key
 
-# only allow reading the files to the owner and the group
+# only allow root reading the files
 chmod -R 700 /opt/tls
 # set the owner to root, nobody should be able to read this files except for the root user
 chown -R root:root /opt/tls
@@ -93,20 +91,17 @@ su -l -c "yarn global add pm2 ts-node" webapp
 
 git clone https://github.com/asl-project-group-7-2021/asl-ca-backend /opt/pm2/asl-ca-backend
 
-# add database configuration file
-cp ./configs/ormconfig.json /opt/pm2/asl-ca-backend
+# install an sql server
+./optional/mariadb.sh
 
-# change credentials
-sed -i "s/toor/$DB_PASSWD/" /opt/pm2/asl-ca-backend/ormconfig.json
+# add database configuration file (is modified by mariadb.sh)
+cp ./configs/ormconfig.json /opt/pm2/asl-ca-backend
 
 # add .env file
 cp ./configs/.env-backend /opt/pm2/asl-ca-backend/.env
 
 chown -R webapp:webapp /opt/pm2/
 chmod -R 700 /opt/pm2/
-
-# install an sql server
-./optional/mariadb.sh $DB_PASSWD
 
 # install yarn dependencies
 su -c "cd /opt/pm2/asl-ca-backend && yarn install" webapp

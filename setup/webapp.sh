@@ -37,7 +37,7 @@ cp ../asl-project-keys/imovies.ch/imovies.ch.key /opt/tls
 ln -s /opt/tls/imovies.ch.crt /opt/tls/certificate.crt
 ln -s /opt/tls/imovies.ch.key /opt/tls/private.key
 
-# only allow reading the files to the owner and the group
+# only allow root reading the files
 chmod -R 700 /opt/tls
 # set the owner to root, nobody should be able to read this files except for the root user
 chown -R root:root /opt/tls
