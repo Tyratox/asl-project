@@ -2,19 +2,6 @@
 
 TYPE=$1
 
-setup_user_dir_for_auditing () {
-  # create the user directory if necessary
-  mkdir -p "/home/$1"
-  # first create it if it doesn't exist yet
-  touch "/home/$1/.bash_history"
-  # then change ownership
-  chown "$1:$1 /home/$1/.bash_history"
-  # and change the permissions
-  chmod 700 "/home/$1/.bash_history"
-  # Only the superuser or a process possessing the CAP_LINUX_IMMUTABLE capability can set or clear this attribute. 
-  chattr +a "/home/$1/.bash_history"
-}
-
 # log all commands executed using bash
 echo "HISTFILE=~/.bash_history" >> /etc/profile
 echo "HISTSIZE=10000" >> /etc/profile
@@ -32,14 +19,7 @@ echo "export HISTFILE HISTSIZE HISTFILESIZE HISTIGNORE HISTCONTROL" >> /etc/prof
 
 # now set the file ~/.bash_history for all users to append-only
 # for root it is a lost cause as the root user can remove the append-only flag anyway
-setup_user_dir_for_auditing "administrator"
-
-if [ "$TYPE" == "backup" ]; then
-  setup_user_dir_for_auditing "ca-backup"
-else
-  setup_user_dir_for_auditing "webapp-ca"
-  setup_user_dir_for_auditing "webapp"
-fi
+./optional/user-dir-auditing.sh "administrator"
 
 # logcheck: https://www.debian.org/doc/manuals/securing-debian-manual/log-alerts.en.html
 

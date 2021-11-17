@@ -6,6 +6,15 @@
 # general debian hardening
 ./debian-hardening.sh "backup"
 
+adduser --gecos "" --disabled-password ca-backup
+./optional/user-dir-auditing.sh "ca-backup"
+
+mkdir /home/ca-backup/.ssh
+cat ./public-keys/ca-backup-key.pub > /home/ca-backup/.ssh/authorized_keys
+
+# restart ssh
+systemctl restart sshd
+
 # set the ip of the computer
 sed -i 's/address 192.168.0.0/address 172.16.0.1/' /etc/network/interfaces
 sed -i 's/network 192.168.0.0/network 172.16.0.0/' /etc/network/interfaces

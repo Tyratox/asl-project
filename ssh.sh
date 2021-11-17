@@ -6,11 +6,6 @@ mkdir /home/administrator/.ssh
 # create new file with authorized keys
 cat ./public-keys/administrator-key.pub > /home/administrator/.ssh/authorized_keys
 
-if [ "$TYPE" == "backup" ]; then
-  mkdir /home/ca-backup/.ssh
-  cat ./public-keys/ca-backup-key.pub > /home/ca-backup/.ssh/authorized_keys
-fi
-
 # disable password authentication
 sed -i 's/#   PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 # enable ssh key authentication
