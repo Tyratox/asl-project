@@ -75,8 +75,10 @@ apt -y install nodejs yarn
 
 # add user for running the node process
 adduser --gecos "" --disabled-password webapp
+chown -R webapp:webapp /home/webapp
 # add user for owning the CA folder and running the setuid binary
 adduser --gecos "" --disabled-password webapp-ca
+chown -R webapp-ca:webapp-ca /home/webapp-ca
 
 WEBAPP_CA_UID=$(id -u webapp-ca)
 
