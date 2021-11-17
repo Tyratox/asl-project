@@ -118,8 +118,8 @@ su -c "cd /opt/pm2/asl-ca-backend && yarn build" webapp
 # run migrations
 su -c "cd /opt/pm2/asl-ca-backend && yarn migrations:run" webapp
 
-sed -i "s/root/$DB_USER/" ./configs/ormconfig.json
-sed -i "s/\"password\": \".*\",/\"password\": \"$DB_PASSWD\",/" ./configs/ormconfig.json
+sed -i "s root $DB_USER g" /opt/pm2/asl-ca-backend/ormconfig.json
+sed -i "s@\"password\": \".*\",@\"password\": \"$DB_PASSWD\",@g" /opt/pm2/asl-ca-backend/ormconfig.json
 
 # update openssl config
 sed -i 's/.\/demoCA/\/opt\/CA/' /etc/ssl/openssl.cnf
