@@ -32,7 +32,7 @@ mkdir /opt/tls
 cp ../asl-project-keys/ca.imovies.ch/ca.imovies.ch.crt /opt/tls
 cp ../asl-project-keys/auth.imovies.ch/auth.imovies.ch.crt /opt/tls
 cp ../asl-project-keys/ca.imovies.ch/ca.imovies.ch.key /opt/tls
-cp ../asl-project-keys/auth.imovies.chauth.imovies.ch.key /opt/tls
+cp ../asl-project-keys/auth.imovies.ch/auth.imovies.ch.key /opt/tls
 
 # setup symlinks for rsyslog
 ln -s /opt/tls/ca.imovies.ch.crt /opt/tls/certificate.crt
