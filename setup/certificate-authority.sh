@@ -133,7 +133,7 @@ echo "webapp-ca ALL=(ALL) NOPASSWD: /usr/sbin/nginx -s reload" > /etc/sudoers.d/
 echo "webapp ALL=(ALL) NOPASSWD: /usr/sbin/nginx -s reload" > /etc/sudoers.d/nginx
 
 # enable reloading nginx
-sed - i 's@// system("sudo nginx -s reload");@system("sudo nginx -s reload");@' /opt/pm2/asl-ca-backend/src/ca-utility.cpp
+sed -i 's@// system("sudo nginx -s reload");@system("sudo nginx -s reload");@' /opt/pm2/asl-ca-backend/src/ca-utility.cpp
 
 # build binary used by the backend
 /opt/pm2/asl-ca-backend/build-ca-utility.sh /opt/pm2/asl-ca-backend/src/ca-utility.cpp /opt/CA/ca-utility /opt/CA/ /etc/ssl/openssl.cnf /usr/bin/openssl $WEBAPP_CA_UID
