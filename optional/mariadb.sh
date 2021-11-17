@@ -13,13 +13,13 @@ DB_PASSWD=$2
 apt -y install mariadb-server
 
 # set root password
-sed -i "s/toor/$DB_ROOT_PASSWD/" ./configs/sql/installation.sql
+sed -i "s toor $DB_ROOT_PASSWD g" ./configs/sql/installation.sql
 
 # set user credentials
-sed -i "s/uname/$DB_USER/g" ./configs/sql/installation.sql
-sed -i "s/pwd/$DB_PASSWD/g" ./configs/sql/installation.sql
-sed -i "s/uname/root/g" ./configs/ormconfig.json
-sed -i "s/pwd/$DB_ROOT_PASSWD/g" ./configs/ormconfig.json
+sed -i "s uname $DB_USER g" ./configs/sql/installation.sql
+sed -i "s pwd $DB_PASSWD g" ./configs/sql/installation.sql
+sed -i "s uname root g" ./configs/ormconfig.json
+sed -i "s pwd $DB_ROOT_PASSWD g" ./configs/ormconfig.json
 
 # secure the installation
 # See https://stackoverflow.com/a/35004940/2897827
