@@ -181,8 +181,7 @@ su -l -c "/home/webapp/.yarn/bin/pm2 save" webapp
 env PATH=$PATH:/usr/bin /home/webapp/.config/yarn/global/node_modules/pm2/bin/pm2 startup systemd -u webapp --hp /home/webapp
 
 # log to journald
-sed -i 's/[Service]/[Service]
-StandardOutput=journal
+sed -i '/Restart=on-failure/a StandardOutput=journal
 StandardError=journal
 SyslogIdentifier=ca-backend/' /etc/systemd/system/pm2-webapp.service
 
