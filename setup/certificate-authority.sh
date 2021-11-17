@@ -93,8 +93,14 @@ su -l -c "yarn global add pm2 ts-node" webapp
 
 git clone https://github.com/asl-project-group-7-2021/asl-ca-backend /opt/pm2/asl-ca-backend
 
+# generate random username
+DB_USER=$(openssl rand -base64 16 | tr '\n' ' ' | sed 's/ //g' | cut -c 1-16)
+
+# generate random password
+DB_PASSWD=$(openssl rand -base64 32 | tr '\n' ' ' | sed 's/ //g' | cut -c 1-32)
+
 # install an sql server
-./optional/mariadb.sh
+./optional/mariadb.sh "$DB_USER" "$DB_PASSWD"
 
 # add database configuration file (is modified by mariadb.sh)
 cp ./configs/ormconfig.json /opt/pm2/asl-ca-backend
@@ -111,6 +117,9 @@ su -c "cd /opt/pm2/asl-ca-backend && yarn install" webapp
 su -c "cd /opt/pm2/asl-ca-backend && yarn build" webapp
 # run migrations
 su -c "cd /opt/pm2/asl-ca-backend && yarn migrations:run" webapp
+
+sed -i "s/root/$DB_USER/" ./configs/ormconfig.json
+sed -i "s/\"password\": \".*\",/\"password\": \"$DB_PASSWD\",/" ./configs/ormconfig.json
 
 # update openssl config
 sed -i 's/.\/demoCA/\/opt\/CA/' /etc/ssl/openssl.cnf
