@@ -2,6 +2,7 @@
 
 MKDIR_PATH=$(which mkdir)
 OPENSSL_PATH=$(which openssl)
+TAR_PATH=$(which tar)
 
 if [ -z "$1" ]
 then
@@ -15,4 +16,4 @@ then
   exit
 fi
 
-g++ -std=c++17 -O3 -Wall "$1" -o "$2" -DOPENSSL_PATH="$OPENSSL_PATH" -DMKDIR_PATH="$MKDIR_PATH"
+g++ -std=c++17 -O3 -Wall "$1" -o "$2" -DOPENSSL_PATH="$OPENSSL_PATH" -DMKDIR_PATH="$MKDIR_PATH" -DTAR_PATH="$TAR_PATH"
