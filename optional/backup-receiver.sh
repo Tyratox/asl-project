@@ -1,3 +1,3 @@
 #!/bin/bash
 
-apt -y install rdiff-backup inotify-tools
+apt -y install rdiff-backup inotify-tools rsync

@@ -197,6 +197,8 @@ systemctl restart nginx
 # encryptd
 cp ./configs/systemd/encryptd-ca-folder.service /etc/systemd/system/encryptd-ca-folder.service
 chmod 644 /etc/systemd/system/encryptd-ca-folder.service
+systemctl enable encryptd-ca-folder
 # backupd
+
 
 ./cleanup.sh
