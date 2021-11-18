@@ -9,6 +9,9 @@
 adduser --gecos "" --disabled-password ca-backup
 ./optional/user-dir-auditing.sh "ca-backup"
 
+# create backup folders
+mkdir /home/ca-backup/CA
+
 # restart ssh
 systemctl restart sshd
 
@@ -47,5 +50,9 @@ chown -R root:root /opt/tls
 # install backup user ssh keys
 mkdir /home/ca-backup/.ssh
 cat ../asl-project-keys/ssh/ca.imovies.ch-key.pub > /home/ca-backup/.ssh/authorized_keys
+chmod 600 /home/ca-backup/.ssh/authorized_keys
+
+# own all files in home directories
+chown -R ca-backup:ca-bckup /home/ca-backup
 
 ./cleanup.sh

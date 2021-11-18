@@ -1,0 +1,13 @@
+[Unit]
+Description=Backup deamon for the CA folder
+
+[Service]
+User=backupr
+ExecStart=/opt/backup/backupd.sh /opt/CA backup.imovies.ch /home/ca-backup/CA/
+Restart=on-failure
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=encryptd-ca-folder
+
+[Install]
+WantedBy=multi-user.target

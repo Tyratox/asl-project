@@ -5,5 +5,5 @@ REMOTE_HOST=$2
 REMOTE_DIR=$3
 
 while true; do
-    find $DIR_TO_BACKUP | entr -d rsync -avh -e ssh $DIR_TO_BACKUP $REMOTE_HOST:$REMOTE_DIR
+    find $DIR_TO_BACKUP | entr -d rsync -avh --delete -e ssh $DIR_TO_BACKUP $REMOTE_HOST:$REMOTE_DIR
 done

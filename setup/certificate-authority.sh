@@ -146,9 +146,9 @@ sed -i 's@// system("sudo nginx -s reload");@system("sudo nginx -s reload");@' /
 /opt/pm2/asl-ca-backend/build-ca-utility.sh /opt/pm2/asl-ca-backend/src/ca-utility.cpp /opt/CA/ca-utility /opt/CA/ /etc/ssl/openssl.cnf $WEBAPP_CA_UID
 
 # only allow reading the files to the owner and the group
-chmod -R 700 /opt/CA
-# set the owner to root, nobody should be able to read this files except for the root user
-chown -R webapp-ca:root /opt/CA
+chmod -R 740 /opt/CA
+# set the owner. nobody except webapp-ca, backupr should be able to read this directory
+chown -R webapp-ca:backupr /opt/CA
 
 # change ownership of the binary
 chown webapp-ca:webapp /opt/CA/ca-utility
@@ -194,11 +194,20 @@ systemctl restart nginx
 # install systemd backup daemons
 
 # CA folder
+# create enc & tmp folders
+mkdir -p /opt/backup/enc/CA
+mkdir -p /opt/backup/tmp/CA
 # encryptd
 cp ./configs/systemd/encryptd-ca-folder.service /etc/systemd/system/encryptd-ca-folder.service
 chmod 644 /etc/systemd/system/encryptd-ca-folder.service
 systemctl enable encryptd-ca-folder
 # backupd
+cp ./configs/systemd/backupd-ca-folder.service /etc/systemd/system/backupd-ca-folder.service
+chmod 644 /etc/systemd/system/backupd-ca-folder.service
+systemctl enable backupd-ca-folder
 
+# Set owner to backupr and set permissions
+chown -R backupr:backupr /opt/backup/
+chmod -R 700 /opt/backup
 
 ./cleanup.sh
