@@ -112,7 +112,7 @@ int main(int argc, char *argv[]){
 
           unlink(ivPath.c_str());
           unlink(tmpEncPath.c_str());
-          return;
+          return 0;
       } else {
           // tar together IV and encrypted file
           execl(tarPath.c_str(), "-cf", file_enc.c_str(), ivPath, tmpEncPath.c_str());
