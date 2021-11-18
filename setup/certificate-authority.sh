@@ -104,7 +104,12 @@ DB_USER=$(openssl rand -base64 16 | tr '\n' ' ' | sed 's/ //g' | cut -c 1-16)
 DB_PASSWD=$(openssl rand -base64 32 | tr '\n' ' ' | sed 's/ //g' | cut -c 1-32)
 
 echo $DB_USER > /home/webapp/sql_user
+chown webapp:webapp /home/webapp/sql_user
+chmod 400 /home/webapp/sql_user
+
 echo $DB_PASSWD > /home/webapp/sql_pass
+chown webapp:webapp /home/webapp/sql_pass
+chmod 400 /home/webapp/sql_pass
 
 # install an sql server
 ./optional/mariadb.sh "$DB_USER" "$DB_PASSWD"
@@ -206,7 +211,9 @@ systemctl restart nginx
 
 # setup backup scripts
 ./optional/backup-sender.sh "ca.imovies.ch"
-
+cp ./backup/dump-sql.sh /home/webapp/dump-sql.sh
+chown webapp:webapp /home/webapp/dump-sql.sh
+chmod 700 /home/webapp/dump-sql.sh
 # install systemd backup daemons
 
 # CA folder
@@ -231,6 +238,7 @@ systemctl enable backupd-ca-folder
 # Mysql database
 mkdir -p /home/webapp/sql-dump
 chown webapp:webapp /home/webapp/sql-dump
+chmod -R 770 /home/webapp/sql-dump
 # create enc & tmp folders
 mkdir -p /opt/backup/enc/sql-dump
 mkdir -p /opt/backup/tmp/sql-dump

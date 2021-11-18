@@ -5,7 +5,7 @@ Wants=dump-sql.timer
 [Service]
 User=webapp
 Type=oneshot
-ExecStart=/opt/backup/dump-sql.sh
+ExecStart=/home/webapp/dump-sql.sh
 
 [Install]
 WantedBy=multi-user.target

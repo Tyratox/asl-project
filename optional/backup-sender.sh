@@ -30,7 +30,6 @@ cp "../asl-project-keys/backup-keys/$HOSTNAME.aes-256.key" /opt/backup/aes-256.k
 # move backup scripts to this folder
 cp ./backup/backupd.sh /opt/backup
 cp ./backup/encryptd.sh /opt/backup
-cp ./backup/dump-sql.sh /opt/backup
 
 chown -R backupr:backupr /opt/backup
 chmod -R 700 /opt/backup
