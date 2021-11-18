@@ -88,20 +88,21 @@ int main(int argc, char *argv[]){
   string CIPHER_MODE = argv[7];
   string KEY_PATH = argv[8];
   
-  fs::path relative_path = fs::relative(file, WATCH_DIR);
-  string ext = relative_path.extension().generic_string();
+  fs::path relativePath = fs::relative(file, WATCH_DIR);
+  string ext = relativePath.extension().generic_string();
 
-  fs::path file_enc =  ENC_PATH / relative_path;
-  file_enc.replace_extension(ext + ".enc");
+  fs::path fileEnc =  ENC_PATH / relativePath;
+  fileEnc.replace_extension(ext + ".enc");
 
-  fs::path ivPath = TMP_PATH / relative_path;
+  fs::path ivPath = TMP_PATH / relativePath;
   ivPath.replace_extension(ext + ".IV");
 
-  fs::path tmpEncPath = TMP_PATH / relative_path;
+  fs::path tmpEncPath = TMP_PATH / relativePath;
   tmpEncPath.replace_extension(ext + ".enc");
 
   mkdir(ivPath.parent_path().c_str());
   mkdir(tmpEncPath.parent_path().c_str());
+  mkdir(fileEnc.parent_path().c_str());
 
   system(("openssl rand -hex 16 > " + ivPath.generic_string()).c_str());
   string IV = readFile(ivPath);
@@ -127,7 +128,7 @@ int main(int argc, char *argv[]){
           return 0;
       } else {
           // tar together IV and encrypted file
-          execl(tarPath.c_str(), "tar", "-cf", file_enc.c_str(), ivPath.c_str(), tmpEncPath.c_str());
+          execl(tarPath.c_str(), "tar", "-cf", fileEnc.c_str(), ivPath.c_str(), tmpEncPath.c_str());
           return 0;
       }
   } else {
