@@ -123,11 +123,11 @@ int main(int argc, char *argv[]){
           return 0;
       } else {
           // tar together IV and encrypted file
-          execl(tarPath.c_str(), "-cf", file_enc.c_str(), ivPath.c_str(), tmpEncPath.c_str());
+          execl(tarPath.c_str(), "tar", "-cf", file_enc.c_str(), ivPath.c_str(), tmpEncPath.c_str());
           return 0;
       }
   } else {
-      execl(opensslPath.c_str(), "enc", ("-" + CIPHER_MODE).c_str(), "-a", "-A", "-iv", IV.c_str(), "-in", file.c_str(), "-out", tmpEncPath.c_str(), "-e", "-k", KEY_PATH.c_str(), NULL);
+      execl(opensslPath.c_str(), "openssl", "enc", ("-" + CIPHER_MODE).c_str(), "-a", "-A", "-iv", IV.c_str(), "-in", file.c_str(), "-out", tmpEncPath.c_str(), "-e", "-k", KEY_PATH.c_str(), NULL);
       return 0;
   }
 
