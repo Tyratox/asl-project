@@ -28,11 +28,13 @@ cp "../asl-project-keys/backup-keys/$HOSTNAME.aes-256.key" /opt/backup/aes-256.k
 ./backup/build-encrypt.sh ./backup/encrypt.cpp /opt/backup/encrypt
 
 # move backup scripts to this folder
-cp ../backup/backupd.sh /opt/backup
-cp ../backup/encryptd.sh /opt/backup
+cp ./backup/backupd.sh /opt/backup
+cp ./backup/encryptd.sh /opt/backup
 
 chown -R backup:backup /opt/backup
 chmod -R 700 /opt/backup
+
+# /opt/backup/encryptd.sh /opt/backup/encrypt /opt/CA /opt/CA_enc aes-256-cbc /opt/backup/aes-256.key
 
 # on backup
 # 1. encrypt using aes key
