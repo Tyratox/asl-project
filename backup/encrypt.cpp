@@ -132,7 +132,7 @@ int main(int argc, char *argv[]){
           int devNull = open("/dev/null", O_WRONLY);
           dup2(devNull, STDERR_FILENO);
           // tar together IV and encrypted file
-          unlink(fileEnc.c_str());
+
           execl(tarPath.c_str(), "tar", "-cf", fileEnc.c_str(), "-C", ivPath.parent_path().c_str(), ivPath.c_str(), tmpEncPath.c_str());
           return 0;
       }
