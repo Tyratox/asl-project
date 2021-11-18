@@ -53,6 +53,6 @@ cat ../asl-project-keys/ssh/ca.imovies.ch-key.pub > /home/ca-backup/.ssh/authori
 chmod 600 /home/ca-backup/.ssh/authorized_keys
 
 # own all files in home directories
-chown -R ca-backup:ca-bckup /home/ca-backup
+chown -R ca-backup:ca-backup /home/ca-backup
 
 ./cleanup.sh
