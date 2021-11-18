@@ -132,8 +132,11 @@ int main(int argc, char *argv[]){
           int devNull = open("/dev/null", O_WRONLY);
           dup2(devNull, STDERR_FILENO);
           // tar together IV and encrypted file
+          fs::path p = ivPath.parent_path();
+          fs::path r1 = fs::relative(ivPath, p);
+          fs::path r2 = fs::relative(tmpEncPath, p);
 
-          execl(tarPath.c_str(), "tar", "-cf", fileEnc.c_str(), "-C", ivPath.parent_path().c_str(), ivPath.c_str(), tmpEncPath.c_str(), NULL);
+          execl(tarPath.c_str(), "tar", "-cf", fileEnc.c_str(), "-C", p.c_str(), r1.c_str(), r2.c_str(), NULL);
           return 0;
       }
   } else {
