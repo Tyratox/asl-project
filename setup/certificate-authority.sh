@@ -179,7 +179,7 @@ chmod g+x /opt/CA/ca-utility
 chmod o-rwx /opt/CA/ca-utility
 
 # and reading the crl folder
-chown webapp-ca:webapp /opt/CA/crl
+chown -R webapp-ca:ca-util /opt/CA/crl
 chmod g+rx /opt/CA/crl
 chmod -R g+r /opt/CA/crl
 
@@ -210,6 +210,7 @@ systemctl restart nginx
 
 # allow backupr to read folder
 usermod -a -G ca-dir backupr
+usermod -a -G ca-util backupr
 # create enc & tmp folders
 mkdir -p /opt/backup/enc/CA
 mkdir -p /opt/backup/tmp/CA
