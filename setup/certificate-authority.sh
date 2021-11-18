@@ -189,6 +189,6 @@ sed -i '/Restart=on-failure/a StandardOutput=journal\nStandardError=journal\nSys
 systemctl restart nginx
 
 # setup backup
-./optional/backup-sender.sh
+./optional/backup-sender.sh "ca.imovies.ch"
 
 ./cleanup.sh
