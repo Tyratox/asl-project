@@ -99,7 +99,7 @@ int main(int argc, char *argv[]){
   mkdir(ivPath.parent_path().c_str());
   mkdir(tmpEncPath.parent_path().c_str());
 
-  system(("openssl rand 16 -hex > " + ivPath.generic_string()).c_str());
+  system(("openssl rand -hex 16 > " + ivPath.generic_string()).c_str());
   string IV = readFile(ivPath);
 
   pid_t c_pid = fork();
