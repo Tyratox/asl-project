@@ -145,21 +145,33 @@ sed -i 's@// system("sudo nginx -s reload");@system("sudo nginx -s reload");@' /
 # build binary used by the backend
 /opt/pm2/asl-ca-backend/build-ca-utility.sh /opt/pm2/asl-ca-backend/src/ca-utility.cpp /opt/CA/ca-utility /opt/CA/ /etc/ssl/openssl.cnf $WEBAPP_CA_UID
 
+# create new groups called 'ca-dir' and 'ca-util'
+groupadd ca-dir
+groupadd ca-util
+
+# add users to it
+usermod -a -G ca-dir root
+usermod -a -G ca-dir webapp-ca
+
+usermod -a -G ca-util root
+usermod -a -G ca-util webapp-ca
+usermod -a -G ca-util webapp
+
 # only allow reading the files to the owner and the group
-chmod -R 740 /opt/CA
-# set the owner. nobody except webapp-ca, backupr should be able to read this directory
-chown -R webapp-ca:backupr /opt/CA
+chmod -R 640 /opt/CA
+# set the owner. nobody except webapp-ca, and members of the group ca-dir should be able to read this directory
+chown -R webapp-ca:ca-dir /opt/CA
 
 # change ownership of the binary
-chown webapp-ca:webapp /opt/CA/ca-utility
-chown webapp-ca:webapp /opt/CA
+chown webapp-ca:ca-util /opt/CA/ca-utility
+chown webapp-ca:ca-util /opt/CA
 
 # setsuid bit
 chmod u+s /opt/CA/ca-utility
 # allow the owner to execute it
 chmod u+x /opt/CA/ca-utility
 
-# allow the webapp user to execute it
+# allow ca-util users to execute it
 chmod g+x /opt/CA
 chmod g+x /opt/CA/ca-utility
 
@@ -168,7 +180,8 @@ chmod o-rwx /opt/CA/ca-utility
 
 # and reading the crl folder
 chown webapp-ca:webapp /opt/CA/crl
-chmod -R g+rx /opt/CA/crl
+chmod g+rx /opt/CA/crl
+chmod -R g+r /opt/CA/crl
 
 # run backend
 su -l -c "/home/webapp/.yarn/bin/pm2 start /opt/pm2/backend.config.js" webapp
@@ -194,6 +207,9 @@ systemctl restart nginx
 # install systemd backup daemons
 
 # CA folder
+
+# allow backupr to read folder
+usermod -a -G ca-dir backupr
 # create enc & tmp folders
 mkdir -p /opt/backup/enc/CA
 mkdir -p /opt/backup/tmp/CA
