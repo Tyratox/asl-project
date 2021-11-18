@@ -133,7 +133,7 @@ int main(int argc, char *argv[]){
           dup2(devNull, STDERR_FILENO);
           // tar together IV and encrypted file
 
-          execl(tarPath.c_str(), "tar", "-cf", fileEnc.c_str(), "-C", ivPath.parent_path().c_str(), ivPath.c_str(), tmpEncPath.c_str());
+          execl(tarPath.c_str(), "tar", "-cf", fileEnc.c_str(), "-C", ivPath.parent_path().c_str(), ivPath.c_str(), tmpEncPath.c_str(), NULL);
           return 0;
       }
   } else {
