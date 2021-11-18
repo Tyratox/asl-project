@@ -9,9 +9,6 @@
 # set the ip of the computer
 sed -i 's/address 192.168.0.0/address 192.168.0.2/' /etc/network/interfaces
 
-# setup rsyslod sender
-./optional/log-sender.sh
-
 # setup nginx
 ./optional/nginx.sh
 
@@ -76,6 +73,14 @@ apt -y install nodejs yarn
 # add user for running the node process
 adduser --gecos "" --disabled-password webapp
 ./optional/user-dir-auditing.sh "webapp"
+
+# create empty log files
+touch /home/webapp/out.log
+touch /home/webapp/error.log
+touch /home/webapp/audit.log
+
+chown webapp:webapp /home/webapp/*.log
+
 # add user for owning the CA folder and running the setuid binary
 adduser --gecos "" --disabled-password webapp-ca
 ./optional/user-dir-auditing.sh "webapp-ca"
@@ -180,7 +185,10 @@ su -l -c "/home/webapp/.yarn/bin/pm2 save" webapp
 # setup pm2 process autostart of the backend nodejs service
 env PATH=$PATH:/usr/bin /home/webapp/.config/yarn/global/node_modules/pm2/bin/pm2 startup systemd -u webapp --hp /home/webapp
 
-# log to journald
+# setup rsyslod sender
+./optional/log-sender.sh "certificate-authority"
+
+# log pm2 output to journald
 sed -i '/Restart=on-failure/a StandardOutput=journal\nStandardError=journal\nSyslogIdentifier=ca-backend/' /etc/systemd/system/pm2-webapp.service
 
 # restart nginx

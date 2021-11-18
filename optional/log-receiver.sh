@@ -7,7 +7,7 @@ firewall-cmd --reload
 # allow ryslog to use tls
 apt-get -y install rsyslog-gnutls
 
-cat ./configs/rsyslog-receiver.conf > /etc/rsyslog.d/receiver.conf
+cp ./configs/rsyslog/receiver.conf /etc/rsyslog.d/receiver.conf
 
 # restart
 systemctl restart rsyslog

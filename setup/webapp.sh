@@ -10,7 +10,7 @@
 sed -i 's/address 192.168.0.0/address 192.168.0.1/' /etc/network/interfaces
 
 # setup rsyslod sender
-./optional/log-sender.sh
+./optional/log-sender.sh "webapp"
 
 # setup nginx
 ./optional/nginx.sh
