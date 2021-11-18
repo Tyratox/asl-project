@@ -1,0 +1,12 @@
+[Unit]
+Description=Backup deamon for the CA folder
+
+[Service]
+ExecStart=/opt/backup/encryptd.sh /opt/backup/encrypt /opt/CA /opt/backup/enc/CA /opt/backup/tmp/CA aes-256-cbc /opt/backup/aes-256.key
+Restart=on-failure
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=encryptd-ca-backend
+
+[Install]
+WantedBy=multi-user.target

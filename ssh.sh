@@ -6,6 +6,8 @@ mkdir /home/administrator/.ssh
 # create new file with authorized keys
 cat ./public-keys/administrator-key.pub > /home/administrator/.ssh/authorized_keys
 
+chown -R administrator:administrator /home/administrator/.ssh
+
 # disable password authentication
 sed -i 's/#   PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 # enable ssh key authentication

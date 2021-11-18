@@ -10,7 +10,7 @@ adduser --gecos "" --disabled-password ca-backup
 ./optional/user-dir-auditing.sh "ca-backup"
 
 mkdir /home/ca-backup/.ssh
-cat ./public-keys/ca-backup-key.pub > /home/ca-backup/.ssh/authorized_keys
+cat ./public-keys/ca.imovies.ch-key.pub > /home/ca-backup/.ssh/authorized_keys
 
 # restart ssh
 systemctl restart sshd

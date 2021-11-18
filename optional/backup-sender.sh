@@ -9,8 +9,8 @@ apt -y install inotify-tools entr rsync
 apt -y install build-essential
 
 # add user that runs the backup scripts
-adduser --gecos "" --disabled-password backup
-./optional/user-dir-auditing.sh "backup"
+adduser --gecos "" --disabled-password backupr
+./optional/user-dir-auditing.sh "backupr"
 
 # generate 32 byte = 256 bit key: openssl rand 32 > ./symmetric.key
 # generate 16 byte = 128 bit IV: openssl rand 16 -hex > ./IV
@@ -31,8 +31,15 @@ cp "../asl-project-keys/backup-keys/$HOSTNAME.aes-256.key" /opt/backup/aes-256.k
 cp ./backup/backupd.sh /opt/backup
 cp ./backup/encryptd.sh /opt/backup
 
-chown -R backup:backup /opt/backup
+chown -R backupr:backupr /opt/backup
 chmod -R 700 /opt/backup
+
+# setup ssh
+mkdir /home/backupr/.ssh
+cat "./public-keys/$HOSTNAME-key" > /home/backupr/.ssh/id_backup
+cp "./configs/ssh/$HOSTNAME" > /home/backupr/.ssh/config
+
+chown -R backupr:backupr /home/backupr/.ssh
 
 # /opt/backup/encryptd.sh /opt/backup/encrypt /opt/CA /opt/CA_enc aes-256-cbc /opt/backup/aes-256.key
 

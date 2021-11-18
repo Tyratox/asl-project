@@ -123,11 +123,16 @@ int main(int argc, char *argv[]){
       } else if (c_pid > 0) {
           wait(nullptr);
 
+          // delete temoprary files
           unlink(ivPath.c_str());
           unlink(tmpEncPath.c_str());
           return 0;
       } else {
+          // don't print error messages such as "Removed / i"
+          int devNull = open("/dev/null", O_WRONLY);
+          dup2(devNull, STDERR_FILENO);
           // tar together IV and encrypted file
+          
           execl(tarPath.c_str(), "tar", "-cf", fileEnc.c_str(), ivPath.c_str(), tmpEncPath.c_str());
           return 0;
       }

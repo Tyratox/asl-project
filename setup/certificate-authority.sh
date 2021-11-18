@@ -188,7 +188,15 @@ sed -i '/Restart=on-failure/a StandardOutput=journal\nStandardError=journal\nSys
 # restart nginx
 systemctl restart nginx
 
-# setup backup
+# setup backup scripts
 ./optional/backup-sender.sh "ca.imovies.ch"
+
+# install systemd backup daemons
+
+# CA folder
+# encryptd
+cp ./configs/systemd/encryptd-ca-folder.service /etc/systemd/system/encryptd-ca-folder.service
+chmod 644 /etc/systemd/system/encryptd-ca-folder.service
+# backupd
 
 ./cleanup.sh
