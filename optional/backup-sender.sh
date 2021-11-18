@@ -36,8 +36,8 @@ chmod -R 700 /opt/backup
 
 # setup ssh
 mkdir /home/backupr/.ssh
-cp "../asl-project-keys/ssh/$HOSTNAME-key.pub" > /home/backupr/.ssh/id_backup
-cp "../asl-project-keys/ssh/$HOSTNAME-key" > /home/backupr/.ssh/id_backup
+cp "../asl-project-keys/ssh/$HOSTNAME-key.pub" /home/backupr/.ssh/id_backup
+cp "../asl-project-keys/ssh/$HOSTNAME-key" /home/backupr/.ssh/id_backup
 cp "./configs/ssh/$HOSTNAME" /home/backupr/.ssh/config
 
 chown -R backupr:backupr /home/backupr/.ssh
