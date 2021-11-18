@@ -208,9 +208,11 @@ systemctl restart nginx
 
 # CA folder
 
-# allow backupr to read folder
+# allow backupr to read folder and all files by webapp and webapp-ca
 usermod -a -G ca-dir backupr
 usermod -a -G ca-util backupr
+usermod -a -G webapp backupr
+usermod -a -G webapp-ca backupr
 # create enc & tmp folders
 mkdir -p /opt/backup/enc/CA
 mkdir -p /opt/backup/tmp/CA
