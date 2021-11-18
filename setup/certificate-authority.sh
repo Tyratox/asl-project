@@ -45,7 +45,6 @@ mkdir -p /opt/CA/private/users
 mkdir -p /opt/CA/crl
 mkdir -p /opt/CA/newcerts
 mkdir -p /opt/CA/requests
-mkdir -p /opt/CA/tmp
 
 touch /opt/CA/index.txt
 touch /opt/CA/crl/crl.pem
@@ -110,6 +109,9 @@ DB_PASSWD=$(openssl rand -base64 32 | tr '\n' ' ' | sed 's/ //g' | cut -c 1-32)
 # add database configuration file (is modified by mariadb.sh)
 cp ./configs/ormconfig.json /opt/pm2/asl-ca-backend
 
+# create tmp folder
+mkdir -p /opt/pm2/asl-ca-backend/tmp
+
 # add .env file
 cp ./configs/.env-backend /opt/pm2/asl-ca-backend/.env
 
@@ -141,10 +143,7 @@ echo "webapp ALL=(ALL) NOPASSWD: /usr/sbin/nginx -s reload" > /etc/sudoers.d/ngi
 sed -i 's@// system("sudo nginx -s reload");@system("sudo nginx -s reload");@' /opt/pm2/asl-ca-backend/src/ca-utility.cpp
 
 # build binary used by the backend
-/opt/pm2/asl-ca-backend/build-ca-utility.sh /opt/pm2/asl-ca-backend/src/ca-utility.cpp /opt/CA/ca-utility /opt/CA/ /etc/ssl/openssl.cnf /usr/bin/openssl $WEBAPP_CA_UID
-
-# remove c++ compiler
-# apt -y purge build-essential
+/opt/pm2/asl-ca-backend/build-ca-utility.sh /opt/pm2/asl-ca-backend/src/ca-utility.cpp /opt/CA/ca-utility /opt/CA/ /etc/ssl/openssl.cnf $WEBAPP_CA_UID
 
 # only allow reading the files to the owner and the group
 chmod -R 700 /opt/CA
@@ -167,11 +166,6 @@ chmod g+x /opt/CA/ca-utility
 # disallow access for everyone else
 chmod o-rwx /opt/CA/ca-utility
 
-# allow webapp user to write to the tmp folder
-chown webapp-ca:webapp /opt/CA/tmp
-chmod u+rwx /opt/CA/tmp
-chmod g+rwx /opt/CA/tmp
-
 # and reading the crl folder
 chown webapp-ca:webapp /opt/CA/crl
 chmod -R g+rx /opt/CA/crl
@@ -193,5 +187,8 @@ sed -i '/Restart=on-failure/a StandardOutput=journal\nStandardError=journal\nSys
 
 # restart nginx
 systemctl restart nginx
+
+# setup backup
+./optional/backup-sender.sh
 
 ./cleanup.sh

@@ -5,6 +5,9 @@
 # uninstall curl
 # apt -y purge curl
 
+# uninstall c++ compiler
+# apt -y purge build-essential
+
 # uninstall git
 apt -y purge git
 
