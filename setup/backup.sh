@@ -9,9 +9,6 @@
 adduser --gecos "" --disabled-password ca-backup
 ./optional/user-dir-auditing.sh "ca-backup"
 
-mkdir /home/ca-backup/.ssh
-cat ../asl-project-keys/ssh/ca.imovies.ch-key.pub > /home/ca-backup/.ssh/authorized_keys
-
 # restart ssh
 systemctl restart sshd
 
@@ -46,5 +43,9 @@ ln -s /opt/tls/backup.imovies.ch.key /opt/tls/private.key
 chmod -R 700 /opt/tls
 # set the owner to root, nobody should be able to read this files except for the root user
 chown -R root:root /opt/tls
+
+# install backup user ssh keys
+mkdir /home/ca-backup/.ssh
+cat ../asl-project-keys/ssh/ca.imovies.ch-key.pub > /home/ca-backup/.ssh/authorized_keys
 
 ./cleanup.sh
