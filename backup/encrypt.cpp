@@ -85,11 +85,12 @@ int main(int argc, char *argv[]){
   string KEY_PATH = argv[8];
   
   fs::path relative_path = fs::relative(file, WATCH_DIR);
+  string ext = relative_path.extension().generic_string();
 
-  fs::path file_enc =  ENC_PATH / (relative_path.append(".enc"));
+  fs::path file_enc =  ENC_PATH / (relative_path.replace_extension(ext + ".enc"));
 
-  fs::path ivPath = TMP_PATH / (relative_path.append(".IV"));
-  fs::path tmpEncPath = TMP_PATH / (relative_path.append(".enc"));
+  fs::path ivPath = TMP_PATH / (relative_path.replace_extension(ext + ".IV"));
+  fs::path tmpEncPath = TMP_PATH / (relative_path.replace_extension(ext + ".enc"));
 
   mkdir(ivPath.parent_path().c_str());
   mkdir(tmpEncPath.parent_path().c_str());
