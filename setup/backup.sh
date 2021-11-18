@@ -9,9 +9,6 @@
 adduser --gecos "" --disabled-password ca-backup
 ./optional/user-dir-auditing.sh "ca-backup"
 
-# create backup folders
-mkdir /home/ca-backup/CA
-
 # restart ssh
 systemctl restart sshd
 

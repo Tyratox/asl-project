@@ -1,9 +1,11 @@
 [Unit]
 Description=Backup deamon for the CA folder
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 User=backupr
-ExecStart=/opt/backup/backupd.sh /opt/CA backup.imovies.ch /home/ca-backup/CA/
+ExecStart=/opt/backup/backupd.sh /opt/CA backup.imovies.ch /home/ca-backup/
 Restart=on-failure
 StandardOutput=journal
 StandardError=journal
