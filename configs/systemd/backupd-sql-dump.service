@@ -1,0 +1,15 @@
+[Unit]
+Description=Backup deamon for the SQL dumps
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=backupr
+ExecStart=/opt/backup/backupd.sh /opt/backup/enc/sql-dump backup.imovies.ch /home/ca-backup/
+Restart=on-failure
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=encryptd-ca-folder
+
+[Install]
+WantedBy=multi-user.target

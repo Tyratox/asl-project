@@ -3,6 +3,10 @@
 # generate random root password
 DB_ROOT_PASSWD=$(openssl rand -base64 32 | tr '\n' ' ' | sed 's/ //g' | cut -c 1-32)
 
+# store it
+echo $DB_ROOT_PASSWD > /root/mysql_root_pass
+chmod 600 /root/mysql_root_pass
+
 # generate random username
 DB_USER=$1
 

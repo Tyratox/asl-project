@@ -1,0 +1,12 @@
+[Unit]
+Description=Dumps the sql database every 15 minutes
+After=mysql.service
+Wants=mysql.service
+
+[Timer]
+OnBootSec=5
+OnCalendar=*:0/15
+Unit=dump-sql.service
+
+[Install]
+WantedBy=timers.target

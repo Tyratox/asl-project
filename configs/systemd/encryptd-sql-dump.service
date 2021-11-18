@@ -1,0 +1,13 @@
+[Unit]
+Description=Encrypt deamon for the SQL dumps
+
+[Service]
+User=backupr
+ExecStart=/opt/backup/encryptd.sh /opt/backup/encrypt /home/webapp/sql-dump /opt/backup/enc/sql-dump /opt/backup/tmp/sql-dump aes-256-cbc /opt/backup/aes-256.key
+Restart=on-failure
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=encryptd-sql-dump
+
+[Install]
+WantedBy=multi-user.target

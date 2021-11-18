@@ -103,6 +103,9 @@ DB_USER=$(openssl rand -base64 16 | tr '\n' ' ' | sed 's/ //g' | cut -c 1-16)
 # generate random password
 DB_PASSWD=$(openssl rand -base64 32 | tr '\n' ' ' | sed 's/ //g' | cut -c 1-32)
 
+echo $DB_USER > /home/webapp/sql_user
+echo $DB_PASSWD > /home/webapp/sql_pass
+
 # install an sql server
 ./optional/mariadb.sh "$DB_USER" "$DB_PASSWD"
 
@@ -224,6 +227,28 @@ systemctl enable encryptd-ca-folder
 cp ./configs/systemd/backupd-ca-folder.service /etc/systemd/system/backupd-ca-folder.service
 chmod 644 /etc/systemd/system/backupd-ca-folder.service
 systemctl enable backupd-ca-folder
+
+# Mysql database
+mkdir -p /home/webapp/sql-dump
+chown webapp:webapp /home/webapp/sql-dump
+# create enc & tmp folders
+mkdir -p /opt/backup/enc/sql-dump
+mkdir -p /opt/backup/tmp/sql-dump
+# add timed dump
+cp ./configs/systemd/dump-sql.timer /etc/systemd/system/dump-sql.timer
+chmod 644 /etc/systemd/system/dump-sql.timer
+cp ./configs/systemd/dump-sql.service /etc/systemd/system/dump-sql.service
+chmod 644 /etc/systemd/system/dump-sql.service
+systemctl enable dump-sql.timer
+# encryptd
+cp ./configs/systemd/encryptd-sql-dump.service /etc/systemd/system/encryptd-sql-dump.service
+chmod 644 /etc/systemd/system/encryptd-sql-dump.service
+systemctl enable encryptd-sql-dump
+# backupd
+cp ./configs/systemd/backupd-sql-dump.service /etc/systemd/system/backupd-sql-dump.service
+chmod 644 /etc/systemd/system/backupd-sql-dump.service
+systemctl enable backupd-sql-dump
+
 
 # Set owner to backupr and set permissions
 chown -R backupr:backupr /opt/backup/
