@@ -73,7 +73,8 @@ apt -y install nodejs yarn
 adduser --gecos "" --disabled-password webapp
 ./optional/user-dir-auditing.sh "webapp"
 # all files created by this user should remain readable by backupd
-chfn -o umask=137 webapp
+chmod -R 750 /home/webapp
+chfn -o umask=027 webapp
 
 # create empty log files
 touch /home/webapp/out.log
@@ -86,7 +87,8 @@ chown webapp:webapp /home/webapp/*.log
 adduser --gecos "" --disabled-password webapp-ca
 ./optional/user-dir-auditing.sh "webapp-ca"
 # all files created by this user should remain readable by backupd
-chfn -o umask=137 webapp-ca
+chmod -R 750 /home/webapp-ca
+chfn -o umask=027 webapp-ca
 
 WEBAPP_CA_UID=$(id -u webapp-ca)
 
