@@ -52,4 +52,22 @@ chmod 600 /home/ca-backup/.ssh/authorized_keys
 # own all files in home directories
 chown -R ca-backup:ca-backup /home/ca-backup
 
+# create versioning daemon
+adduser --gecos "" --disabled-password versionr
+./optional/user-dir-auditing.sh "versionr"
+
+mkdir -p /opt/versioning/
+cp ./backup/versiond.sh /opt/versioning
+
+# create folders for the different servers / backup users
+mkdir -p /opt/versioning/ca.imovies.ch
+
+chown -R versionr:versionr /opt/versioning
+chmod -R 700 /opt/versioning
+
+# versiond
+cp ./configs/systemd/versiond-ca.service /etc/systemd/system/versiond-ca.service
+chmod 644 /etc/systemd/system/versiond-ca.service
+systemctl enable versiond-ca
+
 ./cleanup.sh

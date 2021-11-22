@@ -1,0 +1,13 @@
+[Unit]
+Description=Backup versioning deamon for the certificate authority
+
+[Service]
+User=versionr
+ExecStart=/opt/versioning/versiond.sh /home/ca-backup /opt/versioning/ca.imovies.ch
+Restart=on-failure
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=versiond-ca-backup
+
+[Install]
+WantedBy=multi-user.target
