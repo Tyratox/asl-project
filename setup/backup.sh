@@ -67,7 +67,7 @@ chmod -R 700 /opt/versioning
 
 # allow versionr to read ca-backup files
 usermod -a -G ca-backup backupr
-chown -R 740 /home/ca-backup
+chmod -R 740 /home/ca-backup
 
 # versiond
 cp ./configs/systemd/versiond-ca.service /etc/systemd/system/versiond-ca.service
