@@ -54,8 +54,8 @@ echo "01" > /opt/CA/crlnumber
 
 cp ../asl-project-keys/cakey.pem /opt/CA/private/
 cp ../asl-project-keys/cacert.pem /opt/CA/
-# apparently nginx is fine with just the certificate as an empty CRL
-cp /opt/CA/cacert.pem /opt/CA/crl/revoked.pem
+
+echo "" > /opt/CA/crl/revoked.pem
 
 # install gnupg, required for the following
 apt -y install gnupg
