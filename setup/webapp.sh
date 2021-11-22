@@ -70,8 +70,8 @@ yarn --cwd /srv/asl-ca-frontend export
 
 # set permissions of the folder
 
-chown root:root /srv/asl-ca-frontend/
-chmod 744 /srv/asl-ca-frontend/
+chown www-data:www-data /srv/asl-ca-frontend/
+chmod 750 /srv/asl-ca-frontend/
 
 # restart nginx
 systemctl restart nginx
