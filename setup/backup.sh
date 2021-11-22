@@ -65,6 +65,10 @@ mkdir -p /opt/versioning/ca.imovies.ch
 chown -R versionr:versionr /opt/versioning
 chmod -R 700 /opt/versioning
 
+# allow versionr to read ca-backup files
+usermod -a -G ca-backup backupr
+chown -R 740 /home/ca-backup
+
 # versiond
 cp ./configs/systemd/versiond-ca.service /etc/systemd/system/versiond-ca.service
 chmod 644 /etc/systemd/system/versiond-ca.service
