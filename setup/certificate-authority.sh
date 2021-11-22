@@ -72,6 +72,8 @@ apt -y install nodejs yarn
 # add user for running the node process
 adduser --gecos "" --disabled-password webapp
 ./optional/user-dir-auditing.sh "webapp"
+# all files created by this user should remain readable by backupd
+chfn -o umask=137 webapp
 
 # create empty log files
 touch /home/webapp/out.log
@@ -83,6 +85,8 @@ chown webapp:webapp /home/webapp/*.log
 # add user for owning the CA folder and running the setuid binary
 adduser --gecos "" --disabled-password webapp-ca
 ./optional/user-dir-auditing.sh "webapp-ca"
+# all files created by this user should remain readable by backupd
+chfn -o umask=137 webapp-ca
 
 WEBAPP_CA_UID=$(id -u webapp-ca)
 

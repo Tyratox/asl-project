@@ -8,6 +8,8 @@
 
 adduser --gecos "" --disabled-password ca-backup
 ./optional/user-dir-auditing.sh "ca-backup"
+# all files created by this user should remain readable by versiond
+chfn -o umask=137 ca-backup
 
 # restart ssh
 systemctl restart sshd
