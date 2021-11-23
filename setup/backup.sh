@@ -69,7 +69,7 @@ chown -R versionr:versionr /opt/versioning
 chmod -R 700 /opt/versioning
 
 # allow versionr to read ca-backup files
-usermod -a -G ca-backup backupr
+usermod -a -G ca-backup versionr
 chmod -R 750 /home/ca-backup
 
 # versiond
