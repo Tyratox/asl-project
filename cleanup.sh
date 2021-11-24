@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# rm -r ../asl-project-keys
+rm -r ../asl-project-keys
 
 # uninstall curl
 apt -y purge curl

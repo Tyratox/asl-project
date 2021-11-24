@@ -30,8 +30,8 @@ sed -i 's/gateway 192.168.0.254/gateway 172.16.0.254/' /etc/network/interfaces
 # install curl
 apt -y install curl
 
-# download certificates and private keys
-git clone https://github.com/asl-project-group-7-2021/asl-project-keys.git ../asl-project-keys
+echo "Make sure asl-project-keys is placed at ../asl-project-keys"
+read -n 1
 
 # move them to /opt/tls
 mkdir /opt/tls

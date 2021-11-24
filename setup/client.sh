@@ -59,8 +59,8 @@ then
   sed -i "s/admin@/$PFSENSE_USERNAME@/g" ./configs/pfsense/fw-2.imovies.ch.xml
 fi
 
-# download certificates and private keys
-git clone https://github.com/asl-project-group-7-2021/asl-project-keys.git ../asl-project-keys
+echo "Make sure asl-project-keys is placed at ../asl-project-keys"
+read -n 1
 
 CRT_1_BASE64=$(cat ../asl-project-keys/fw-1.imovies.ch/fw-1.imovies.ch.crt | base64 -w 0)
 CRT_2_BASE64=$(cat ../asl-project-keys/fw-2.imovies.ch/fw-2.imovies.ch.crt | base64 -w 0)
