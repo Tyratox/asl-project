@@ -10,7 +10,7 @@ apt -y install firewalld
 firewall-cmd --permanent --remove-service=dhcpv6-client
 
 # now install the custom root certificate. extension must be .crt
-cp ./public-keys/web-root.crt /usr/local/share/ca-certificates/
+cp ../asl-project-keys/web-root.crt /usr/local/share/ca-certificates/
 update-ca-certificates
 
 # resolve hostnames using /etc/hosts

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Make sure asl-project-keys is placed at ../asl-project-keys"
+read -n 1
+
 # set the hostname
 ./optional/set-hostname.sh "backup.imovies.ch"
 
@@ -29,9 +32,6 @@ sed -i 's/gateway 192.168.0.254/gateway 172.16.0.254/' /etc/network/interfaces
 
 # install curl
 apt -y install curl
-
-echo "Make sure asl-project-keys is placed at ../asl-project-keys"
-read -n 1
 
 # move them to /opt/tls
 mkdir /opt/tls

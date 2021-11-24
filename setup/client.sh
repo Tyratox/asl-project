@@ -3,6 +3,9 @@
 PFSENSE_USERNAME=$1
 PFSENSE_PWD=$2
 
+echo "Make sure asl-project-keys is placed at ../asl-project-keys"
+read -n 1
+
 # set the hostname
 ./optional/set-hostname.sh "client1.imovies.ch"
 
@@ -12,7 +15,7 @@ PFSENSE_PWD=$2
 apt -y install sudo
 
 # now install the custom root certificate. extension must be .crt
-cp ./public-keys/web-root.crt /usr/local/share/ca-certificates/
+cp ../asl-project-keys/web-root.crt /usr/local/share/ca-certificates/
 update-ca-certificates
 
 # resolve hostnames using /etc/hosts
@@ -58,9 +61,6 @@ then
   sed -i "s/admin@/$PFSENSE_USERNAME@/g" ./configs/pfsense/fw-1.imovies.ch.xml
   sed -i "s/admin@/$PFSENSE_USERNAME@/g" ./configs/pfsense/fw-2.imovies.ch.xml
 fi
-
-echo "Make sure asl-project-keys is placed at ../asl-project-keys"
-read -n 1
 
 CRT_1_BASE64=$(cat ../asl-project-keys/fw-1.imovies.ch/fw-1.imovies.ch.crt | base64 -w 0)
 CRT_2_BASE64=$(cat ../asl-project-keys/fw-2.imovies.ch/fw-2.imovies.ch.crt | base64 -w 0)

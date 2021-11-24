@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Make sure asl-project-keys is placed at ../asl-project-keys"
+read -n 1
+
 # set the hostname
 ./optional/set-hostname.sh "ca.imovies.ch"
 
@@ -20,9 +23,6 @@ sed -i 's/address 192.168.0.0/address 192.168.0.2/' /etc/network/interfaces
 
 # install curl
 apt -y install curl
-
-echo "Make sure asl-project-keys is placed at ../asl-project-keys"
-read -n 1
 
 # move them to /opt/tls
 mkdir /opt/tls

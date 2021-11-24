@@ -4,7 +4,7 @@ TYPE=$1
 
 mkdir /home/administrator/.ssh
 # create new file with authorized keys
-cat ./public-keys/administrator-key.pub > /home/administrator/.ssh/authorized_keys
+cat ../asl-project-keys/ssh/administrator-key.pub > /home/administrator/.ssh/authorized_keys
 
 chown -R administrator:administrator /home/administrator/.ssh
 
