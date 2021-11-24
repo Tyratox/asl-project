@@ -3,10 +3,10 @@
 # rm -r ../asl-project-keys
 
 # uninstall curl
-# apt -y purge curl
+apt -y purge curl
 
-# uninstall c++ compiler
-# apt -y purge build-essential
+# uninstall c++ compiler and linux headers
+apt -y purge build-essential dkms linux-headers-$(uname -r)
 
 # uninstall git
 apt -y purge git
