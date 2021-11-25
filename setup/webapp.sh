@@ -6,6 +6,10 @@ read -n 1
 # set the hostname
 ./optional/set-hostname.sh "imovies.ch"
 
+cat ./configs/ssh/user.conf > /etc/ssh/sshd_config.d/user.conf
+
+adduser --gecos "" a3
+
 # general debian hardening
 ./debian-hardening.sh "service"
 
