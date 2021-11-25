@@ -1,0 +1,11 @@
+Host imovies.ch
+  User administrator
+  IdentityFile "~/.ssh/administrator-key"
+
+Host ca.imovies.ch
+  User administrator
+  IdentityFile "~/.ssh/administrator-key"
+
+Host backup.imovies.ch
+  User administrator
+  IdentityFile "~/.ssh/administrator-key"
