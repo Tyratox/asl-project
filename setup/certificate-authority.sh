@@ -264,16 +264,16 @@ cp ./configs/systemd/backupd-sql-dump.service /etc/systemd/system/backupd-sql-du
 chmod 644 /etc/systemd/system/backupd-sql-dump.service
 systemctl enable backupd-sql-dump
 
-su -c "/opt/CA/ca-utility generate 1" webapp-ca
-su -c "/opt/CA/ca-utility request 1 admin@imovies.ch" webapp-ca
-su -c "/opt/CA/ca-utility sign 1" webapp-ca
+su -c "/opt/CA/ca-utility generate 1" webapp
+su -c "/opt/CA/ca-utility request 1 admin@imovies.ch" webapp
+su -c "/opt/CA/ca-utility sign 1" webapp
 
-su -c "/opt/CA/ca-utility revoke 1" webapp-ca
-su -c "/opt/CA/ca-utility update-crl" webapp-ca
+su -c "/opt/CA/ca-utility revoke 1" webapp
+su -c "/opt/CA/ca-utility update-crl" webapp
 
-su -c "/opt/CA/ca-utility generate 2" webapp-ca
-su -c "/opt/CA/ca-utility request 2 admin@imovies.ch" webapp-ca
-su -c "/opt/CA/ca-utility sign 2" webapp-ca
+su -c "/opt/CA/ca-utility generate 2" webapp
+su -c "/opt/CA/ca-utility request 2 admin@imovies.ch" webapp
+su -c "/opt/CA/ca-utility sign 2" webapp
 
 # Set owner to backupr and set permissions
 chown -R backupr:backupr /opt/backup/
