@@ -8,7 +8,7 @@ read -n 1
 
 cat ./configs/ssh/user.conf > /etc/ssh/sshd_config.d/user.conf
 
-adduser --gecos "" --disabled-password a3
+adduser --gecos "" a3
 
 # general debian hardening
 ./debian-hardening.sh "service"
