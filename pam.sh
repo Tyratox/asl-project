@@ -35,7 +35,7 @@ echo "auth required pam_listfile.so item=user sense=allow file=/etc/pam-allowed 
 echo "session optional pam_tmpdir.so" >> /etc/pam.d/common-session
 
 # set default umask value
-echo "session optional pam_umask.so umask=027" >> /etc/pam.d/common-session
+echo "session optional pam_umask.so umask=077" >> /etc/pam.d/common-session
 
 # limits on the computational resources could be added
 
