@@ -38,4 +38,6 @@ cat ./configs/client-interfaces.conf > /etc/network/interfaces
 # set the ip of the computer
 sed -i 's/address 10.0.0.0/address 10.0.0.1/' /etc/network/interfaces
 
+cp ./configs/systemd/client.network /etc/systemd/network/
+
 ./cleanup.sh
