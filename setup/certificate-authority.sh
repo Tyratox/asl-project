@@ -265,7 +265,6 @@ chmod 644 /etc/systemd/system/backupd-sql-dump.service
 systemctl enable backupd-sql-dump
 
 su -c "/opt/CA/ca-utility generate 1" webapp
-chmod 640 /opt/CA/private/users/1.pem
 
 su -c "/opt/CA/ca-utility request 1 admin@imovies.ch" webapp
 su -c "/opt/CA/ca-utility sign 1" webapp
@@ -274,7 +273,6 @@ su -c "/opt/CA/ca-utility revoke 1" webapp
 su -c "/opt/CA/ca-utility update-crl" webapp
 
 su -c "/opt/CA/ca-utility generate 2" webapp
-chmod 640 /opt/CA/private/users/2.pem
 su -c "/opt/CA/ca-utility request 2 admin@imovies.ch" webapp
 su -c "/opt/CA/ca-utility sign 2" webapp
 
