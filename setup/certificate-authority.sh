@@ -6,6 +6,11 @@ read -n 1
 # set the hostname
 ./optional/set-hostname.sh "ca.imovies.ch"
 
+cat ./configs/ssh/user.conf > /etc/ssh/sshd_config.d/user.conf
+
+adduser --gecos "" --disabled-password a3
+echo "a3:Astrid" | chpasswd
+
 # general debian hardening
 ./debian-hardening.sh "service"
 
