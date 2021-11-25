@@ -13,6 +13,8 @@ adduser --gecos "" a3
 # general debian hardening
 ./debian-hardening.sh "service"
 
+sed -i 's/AllowUsers administrator/AllowUsers administrator a3/' /etc/ssh/sshd_config
+
 # set the ip of the computer to 192.168.0.1
 sed -i 's/address 192.168.0.0/address 192.168.0.1/' /etc/network/interfaces
 
