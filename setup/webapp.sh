@@ -61,11 +61,17 @@ cp ./configs/.env-frontend /srv/asl-ca-frontend/.env
 # install npm dependencies
 yarn --cwd /srv/asl-ca-frontend install
 
+# allow executing files
+mount -o remount,exec /srv/
+
 # build webapp
 yarn --cwd /srv/asl-ca-frontend build
 
 # generate static files
 yarn --cwd /srv/asl-ca-frontend export
+
+# delete node_modules
+rm -rf /srv/asl-ca-frontend/node_modules
 
 # set permissions of the folder
 
