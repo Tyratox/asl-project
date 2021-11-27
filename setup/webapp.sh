@@ -81,7 +81,7 @@ rm -rf /srv/asl-ca-frontend/node_modules
 
 # set permissions of the folder
 
-chown www-data:www-data /srv/asl-ca-frontend/
+chown a3:www-data /srv/asl-ca-frontend/
 chmod 750 /srv/asl-ca-frontend/
 
 # restart nginx
