@@ -174,6 +174,8 @@ usermod -a -G ca-util webapp
 
 # only allow reading the files to the owner and the group
 chmod -R 750 /opt/CA
+# allow backupr to delete user private keys
+chmod -R 770 /opt/CA/private/users
 # set the owner. nobody except webapp-ca, and members of the group ca-dir should be able to read this directory
 chown -R webapp-ca:ca-dir /opt/CA
 
