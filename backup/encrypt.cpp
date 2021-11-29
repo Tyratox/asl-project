@@ -126,6 +126,12 @@ int main(int argc, char *argv[]){
           // delete temoprary files
           unlink(ivPath.c_str());
           unlink(tmpEncPath.c_str());
+
+          //also: after encryption of user private keys we can also delete the original files!
+          if (relativePath.generic_string().find("private/users/") != std::string::npos) {
+              unlink(file.c_str());
+          }
+
           return 0;
       } else {
           // don't print error messages such as "Removed / i"
