@@ -55,7 +55,7 @@ echo "01" > /opt/CA/crlnumber
 cp ../asl-project-keys/cakey.pem /opt/CA/private/
 cp ../asl-project-keys/cacert.pem /opt/CA/
 
-openssl ca -gencrl -out /opt/CA/crl/crl.pem -config /etc/ssl/openssl.cn
+openssl ca -gencrl -out /opt/CA/crl/crl.pem -config /etc/ssl/openssl.cnf
 cat /opt/CA/cacert.pem /opt/CA/crl/crl.pem > /opt/CA/crl/revoked.pem
 
 # install gnupg, required for the following
