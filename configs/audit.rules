@@ -436,6 +436,14 @@
 ## Kubelet
 -w /usr/bin/kubelet -k kubelet
 
+## Custom
+
+# CA directory
+-w /opt/CA -p wa -k actions
+
+# Backup
+-w /opt/versioning -p wa -k actions
+
 # High Volume Events ----------------------------------------------------------
 
 ## Remove them if they cause to much volume in your environment

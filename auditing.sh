@@ -31,6 +31,9 @@ apt -y install auditd
 # Use these rules https://github.com/Neo23x0/auditd/blob/master/audit.rules
 cp ./configs/audit.rules /etc/audit/rules.d/audit.rules
 
+# make them immutable
+chattr +i /etc/audit/rules.d/audit.rules
+
 # and enable it
 systemctl enable auditd
 service auditd start
