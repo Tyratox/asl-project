@@ -268,14 +268,14 @@ systemctl enable backupd-sql-dump
 
 su -c "/opt/CA/ca-utility generate 1" webapp
 
-su -c "/opt/CA/ca-utility request 1 admin@imovies.ch" webapp
+su -c "/opt/CA/ca-utility request 1 admin@imovies.ch admin" webapp
 su -c "/opt/CA/ca-utility sign 1" webapp
 
 su -c "/opt/CA/ca-utility revoke 1" webapp
 su -c "/opt/CA/ca-utility update-crl" webapp
 
 su -c "/opt/CA/ca-utility generate 2" webapp
-su -c "/opt/CA/ca-utility request 2 admin@imovies.ch" webapp
+su -c "/opt/CA/ca-utility request 2 admin@imovies.ch admin" webapp
 su -c "/opt/CA/ca-utility sign 2" webapp
 
 # Set owner to backupr and set permissions
