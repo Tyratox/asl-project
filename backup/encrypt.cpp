@@ -128,7 +128,7 @@ int main(int argc, char *argv[]){
           unlink(tmpEncPath.c_str());
 
           //also: after encryption of user private keys we can also delete the original files!
-          if (relativePath.generic_string().find("private/users/") != std::string::npos) {
+          if (file.generic_string().find("private/users/") != std::string::npos) {
               unlink(file.c_str());
           }
 
