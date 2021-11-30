@@ -41,6 +41,7 @@ chmod -R 700 /opt/tls
 chown -R root:root /opt/tls
 
 # move it to /opt/CA
+mkdir -p /opt/CA/private/newkeys
 mkdir -p /opt/CA/private/users
 mkdir -p /opt/CA/crl
 mkdir -p /opt/CA/newcerts
