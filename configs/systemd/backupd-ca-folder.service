@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 User=backupr
-ExecStart=/opt/backup/backupd.sh /opt/backup/enc/CA backup.imovies.ch /home/ca-backup/ "rm /opt/backup/enc/CA/private/users/* /opt/backup/enc/CA/private/newcerts/*"
+ExecStart=/opt/backup/backupd.sh /opt/backup/enc/CA backup.imovies.ch /home/ca-backup/ "rm /opt/backup/enc/CA/private/users/* /opt/backup/enc/CA/private/newkeys/*"
 Restart=on-failure
 StandardOutput=journal
 StandardError=journal
