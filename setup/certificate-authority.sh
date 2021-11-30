@@ -142,6 +142,7 @@ su -c "cd /opt/pm2/asl-ca-backend && yarn migrations:run" webapp
 
 chown -R root:webapp /opt/pm2/
 chmod -R 750 /opt/pm2/
+chmod -R 770 /opt/pm2/asl-ca-backend/src/schema.gql
 
 sed -i "s root $DB_USER g" /opt/pm2/asl-ca-backend/ormconfig.json
 sed -i "s@\"password\": \".*\",@\"password\": \"$DB_PASSWD\",@g" /opt/pm2/asl-ca-backend/ormconfig.json
