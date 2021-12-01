@@ -7,6 +7,9 @@ module.exports = {
       args: "/opt/pm2/asl-ca-backend/src/main.ts",
       out_file: "/home/webapp/out.log",
       error_file: "/home/webapp/error.log",
+      env: {
+        NODE_ENV: "production",
+      },
     },
   ],
 };
